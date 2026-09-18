@@ -63,9 +63,9 @@
       "command": ["npx", "-y", "@playwright/mcp", "--headless", "--browser", "chrome"],
       "enabled": true
     },
-    "memory": {
+    "codebase-memory-mcp": {
       "type": "local",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-memory"],
+      "command": ["C:/Users/Admin/AppData/Local/Programs/codebase-memory-mcp/codebase-memory-mcp.exe"],
       "enabled": true
     },
     "sequential-thinking": {

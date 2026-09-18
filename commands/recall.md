@@ -2,7 +2,7 @@
 description: Usage
 ---
 
-Search past session observations and lessons for relevant context. Wraps the `memory_smart_search` and `memory_lesson_recall` MCP tools.
+Search past session observations, decisions, and lessons stored in the project knowledge graph (`codebase-memory-mcp`) for relevant context. Replaces the removed generic `memory` server — cross-session knowledge now lives in `codebase-memory-mcp` (code index + ADR records + notes).
 
 ## Usage
 
@@ -12,12 +12,14 @@ Search past session observations and lessons for relevant context. Wraps the `me
 
 ## Instructions
 
-1. Call `memory_smart_search` with the query and `limit: 10` (hybrid BM25 + vector + graph search).
-2. Call `memory_lesson_recall` with the same query and `limit: 5` (lesson search).
+1. Query the `codebase-memory-mcp` server:
+   - `search_graph` over the indexed codebase for matching functions, classes, and relationships relevant to the query.
+   - ADR/decision lookup for architecture choices tagged with the query's concepts.
+   - Any notes/observations already stored for this project.
+2. Also read `docs/knowledge.md` if present (fallback store).
 3. Combine results and present to the user:
-   - Group by session
-   - Show type, title, and narrative for each observation
-   - Highlight high-importance observations
-   - Show lessons separately with confidence scores
+   - Group by type (pattern, preference, architecture, bug, workflow, fact)
+   - Show title and context for each
+   - Highlight high-importance and architecture items
 4. If no results, suggest 2-3 alternative search terms.
 5. **Never hallucinate results.** Only present what the MCP tools actually return.

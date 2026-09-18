@@ -10,7 +10,7 @@ Searching for "opencode config", "opencode agents", "opencode skills", or an "ev
 - **83 slash commands** (`/plan`, `/tdd`, `/code-review`, `/security`, `/build-fix`, `/e2e`, ...) for repeatable agent workflows
 - **295 skill packages** — patterns, workflows, and audits across every major stack
 - **9 plugins** — secret protection, dangerous-command blocking, type checking, session summaries, and more
-- **Preconfigured MCP servers** — Context7, GitHub, Playwright, Supabase, memory, sequential-thinking, and more
+- **Preconfigured MCP servers** — Context7, Playwright, sequential-thinking, and codebase-memory-mcp (project knowledge graph + persistent decisions, replacing the generic memory server)
 - **Built-in LSP servers** — editor-grade diagnostics and navigation feedback for the agent across TypeScript, Python, Go, Rust, Java, C/C++, PHP, and more (started on demand)
 
 ---
@@ -102,7 +102,7 @@ Optional per-feature runtimes: any stack tool you actually develop with (python,
 
 ### Network
 
-- **First launch:** opencode downloads its model provider SDKs; enabled MCP servers are fetched on demand (`context7`, `grep` are remote; `playwright`, `memory`, `sequential-thinking` via `npx`). Playwright drives your installed Chrome — no browser download required.
+- **First launch:** opencode downloads its model provider SDKs; enabled MCP servers are fetched on demand (`context7` is remote; `playwright`, `sequential-thinking` via `npx`; `codebase-memory-mcp` is a local binary — install it and adjust its path in `opencode.json`). Playwright drives your installed Chrome — no browser download required.
 - **Runtime:** model API access required (Anthropic, OpenAI, or any provider configured in opencode).
 
 ---
@@ -181,7 +181,7 @@ Type `@` and pick an agent, or call one directly:
 /build-fix
 /e2e
 /verify   # run the project's verification loop before claiming done
-/remember /recall   # project/global memory (if the memory plugin/server is on)
+/remember /recall   # store & recall project knowledge via codebase-memory-mcp
 /status   # visual progress snapshot
 ```
 
@@ -208,32 +208,25 @@ Ships with safe defaults:
 - **MCP servers** — a curated catalog of the most-used, open-source, officially recommended servers:
   - ✅ **enabled** (no keys, low context cost):
     - `context7` — up-to-date library/framework docs (remote)
-    - `grep` — free code search across millions of public packages (remote)
     - `playwright` — official cross-browser automation, headless, uses your installed Chrome (`--browser chrome`, no download)
-    - `memory` — official persistent memory server
     - `sequential-thinking` — structured multi-step reasoning
+    - `codebase-memory-mcp` — local project knowledge graph: auto-indexes your code (functions, classes, call chains) and persists cross-session decisions (ADR records). Replaces the generic `memory` server, and the `/remember` + `/recall` commands route through it. See "[Enabling project memory](#enabling-project-memory)" below.
   - ❌ **configured, disabled by default** — flip `"enabled": true` when needed:
-    - `github` — official `github-mcp-server` (needs `GITHUB_PERSONAL_ACCESS_TOKEN`; see "[Enabling GitHub MCP](#enabling-github-mcp)" below)
-    - `chrome-devtools` — browser debugging, profiling, screenshots
-    - `filesystem` — official scoped file access
     - `firecrawl` — web scraping (needs `FIRECRAWL_API_KEY`)
-    - `tavily` — AI web search (needs `TAVILY_API_KEY`)
     - `postgres` — official Postgres server (needs `DATABASE_URI`)
     - `sentry` — error/issues context (official OAuth remote)
 
-### Enabling GitHub MCP
+### Enabling project memory (codebase-memory-mcp)
 
-With no Docker, run the official `github-mcp-server` binary. Two steps:
+`codebase-memory-mcp` is the pack's single memory server (the generic `server-memory` was removed as redundant). It indexes the repo into a searchable knowledge graph and persists architecture decisions/notes across sessions — the `/remember` and `/recall` commands route through it.
 
-1. **Get the binary** — download `github-mcp-server_Windows_x86_64.zip` (or `_Linux_*` / `_macOS_*`) from [github/github-mcp-server releases](https://github.com/github/github-mcp-server/releases) and put `github-mcp-server` (`.exe`) on your `PATH`. (Alternative with Docker: `ghcr.io/github/github-mcp-server` + OAuth, no token — see the project docs.)
-2. **Set a token** — create a fine-grained PAT (https://github.com/settings/tokens) with `repo:read`, `issues:read` and set it for your user session:
-   ```bash
-   # Windows (PowerShell) — replace <TOKEN> with your PAT
-   setx GITHUB_PERSONAL_ACCESS_TOKEN "<TOKEN>"
-   # macOS / Linux
-   echo 'export GITHUB_PERSONAL_ACCESS_TOKEN="<TOKEN>"' >> ~/.zshrc
-   ```
-   Then flip `"enabled": true` for the `github` entry and restart opencode.
+1. Install the `codebase-memory-mcp` binary on your machine (this repo uses a Windows build at `C:\Users\Admin\AppData\Local\Programs\codebase-memory-mcp\`).
+2. Adjust the `command` path of the `codebase-memory-mcp` entry in `opencode.json` to your install location (or remove the entry to rely on a global config).
+3. Index your projects with `/index-repository` (or the server's `index_repository` tool), then use `/remember` and `/recall`.
+
+### GitHub (no MCP needed)
+
+GitHub work is covered by the bundled `@github` agent + `github-ops` skill using the installed `gh` CLI — the official `github-mcp-server` previously in this pack was removed because it overlaps `gh`. To add it back if you need a token-based server, see [github/github-mcp-server](https://github.com/github/github-mcp-server).
 
 ### Model providers
 
@@ -249,12 +242,12 @@ Agents use **your default opencode model**. To pin a different model globally or
 
 | Integration | How | Enabled |
 | --- | --- | --- |
-| **MCP servers** | `opencode.json` → `mcp` | 5 on, 7 off (see [Configuration](#configuration)) |
+| **MCP servers** | `opencode.json` → `mcp` | 4 on, 3 off (see [Configuration](#configuration)) |
 | **LSP servers** | `opencode.json` → `lsp` | built-ins enabled, on demand |
 | **Cloudflare** | bundled skills (`cloudflare`, `wrangler`, `durable-objects`, ...) | on demand |
 | **Supabase** | add your project MCP (`https://mcp.supabase.com/mcp?project_ref=<ref>`) | add manually |
 | **GitHub** | `@github` agent + `github-ops` skill + `gh` CLI | on demand |
-| **Browser automation** | `chrome-devtools` MCP + `e2e-testing` skill | off, enable in config |
+| **Browser automation** | `playwright` MCP + `e2e-testing` skill | enabled |
 | **Google Workspace** | `google-workspace-ops` skill | on demand |
 | **Docker / K8s** | `docker-patterns`, `kubernetes-patterns` skills | on demand |
 
@@ -391,7 +384,7 @@ Merge rules (baked into `scripts/merge.mjs`):
 | **How do I install opencode agents, commands, and skills?** | Copy the pack into `~/.config/opencode/` (plus `opencode.json`) and restart opencode. OpenCode auto-detects it. See [Installation](#installation). |
 | **Does this work with Claude Code?** | Skills use the portable SKILL.md format shared with Claude Code and other AI coding CLIs, but the pack is *packaged for opencode*. Use it to bootstrap or extend an opencode setup. |
 | **Which stacks are covered?** | Next.js, React, Nuxt, Vue, Node.js, Django, FastAPI, Laravel, CodeIgniter, Spring Boot, Rust, Go, Python, C#, Flutter, Android/Kotlin, Swift, C++, Angular — plus review, security, TDD, E2E, refactoring, SEO, and database specialists. |
-| **What MCP servers are included?** | Enabled by default: Context7 (live docs), grep.app, Playwright (installed Chrome), memory, sequential-thinking. Opt-in: GitHub, Chrome DevTools, filesystem, Firecrawl, Postgres, Tavily, Sentry, Supabase. See [Configuration](#configuration). |
+| **What MCP servers are included?** | Enabled by default: Context7 (live docs), Playwright (installed Chrome), sequential-thinking, codebase-memory-mcp (project knowledge graph + persistent decisions). Opt-in: Firecrawl, Postgres, Sentry. See [Configuration](#configuration). |
 | **How big is the pack?** | 54 agents, 83 commands, 295 skills, 9 plugins — every component validated with `npm run validate`. |
 
 ---
