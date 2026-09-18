@@ -97,24 +97,19 @@ For each art direction option:
 
 ### Step 4: Export Banners to Images
 
-After designing HTML banners, export each to PNG using `chrome-devtools` skill:
+After designing HTML banners, export each to PNG using the Playwright MCP server:
 
 1. **Serve HTML files** via local server (python http.server or similar)
 2. **Screenshot each banner** at exact platform dimensions:
-   ```bash
-   # Export banner to PNG at exact dimensions
-   node .claude/skills/chrome-devtools/scripts/screenshot.js \
-     --url "http://localhost:8765/banner-01-minimalist.html" \
-     --width 1500 --height 500 \
-     --output "assets/banners/{campaign}/{variant}-{size}.png"
+   ```
+   playwright browser_navigate "http://localhost:8765/banner-01-minimalist.html"
+   playwright browser_resize 1500 500
+   playwright browser_take_screenshot ... (full page) -> assets/banners/{campaign}/{variant}-{size}.png
    ```
 3. **Auto-compress** if >5MB (Sharp compression built-in):
-   ```bash
-   # With custom max size threshold
-   node .claude/skills/chrome-devtools/scripts/screenshot.js \
-     --url "http://localhost:8765/banner-02-gradient.html" \
-     --width 1500 --height 500 --max-size 3 \
-     --output "assets/banners/{campaign}/{variant}-{size}.png"
+   ```
+   playwright browser_take_screenshot -> assets/banners/{campaign}/{variant}-{size}.png
+   # Optionally post-process with Sharp via a small node script
    ```
 
 **Output path convention** (per `assets-organizing` skill):

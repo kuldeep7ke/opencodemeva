@@ -14,12 +14,12 @@ const plugin: Plugin = async (context) => {
       try {
         const { $ } = context
 
-        const lintResult = await $`npm run lint --silent 2>/dev/null || true`
+        const lintResult = await $`npm run lint --if-present --silent 2>/dev/null`
         if (lintResult.exitCode !== 0) {
           console.warn(`⚠️  Lint errors detected. Consider fixing before commit.`)
         }
 
-        const testResult = await $`npm test --silent 2>/dev/null || true`
+        const testResult = await $`npm test --if-present --silent 2>/dev/null`
         if (testResult.exitCode !== 0) {
           console.warn(`⚠️  Test failures detected. Consider fixing before commit.`)
         }

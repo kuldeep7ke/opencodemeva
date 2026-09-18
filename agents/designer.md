@@ -30,7 +30,7 @@ permission:
     "git log*": allow
   stitch_*: allow
   nuxt-ui_*: allow
-  chrome-devtools_*: allow
+  playwright_*: allow
 ---
 
 # UI/UX Designer Agent

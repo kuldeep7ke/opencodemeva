@@ -19,12 +19,12 @@ The command runs a 3-step recovery protocol:
 
 ### Step 1: Recall Memory Context
 
-Query agentmemory for:
-1. `memory_smart_search(query: "task-status progress current-state", limit: 5)` — restore task tracking state
-2. `memory_smart_search(query: "user preferences", limit: 3)` — reload user preferences
-3. `memory_smart_search(query: "project conventions", limit: 3)` — reload conventions
-4. `memory_recall(query: "current-state")` — get last session log
-5. `memory_sessions(limit: 5)` — see recent activity
+Query the project knowledge graph (`codebase-memory-mcp`) and recent state for context:
+1. `search_graph` / `get_architecture` over the indexed codebase — restore module structure and conventions
+2. `git log --oneline -5` + `git status` — reconstruct what the last session changed
+3. Review ADR records (via `manage_adr`) — restore architecture decisions from previous sessions
+4. `todowrite` cache — restore in-flight task items if present
+5. `trace_path` on symbols mentioned in the last session's notes — reconnect callers/callees
 
 ### Step 2: Verify Against Codebase
 
@@ -63,4 +63,4 @@ Shall I continue with BE-002 (validation middleware)?
 This command relies on:
 - `agent-memory-workflow` skill — for the session start recall ritual
 - `progress-tracking` skill — for task status recovery
-- `agentmemory` MCP — for persistent storage
+- `codebase-memory-mcp` — for persistent project knowledge (code index + ADR records)

@@ -11,8 +11,8 @@ export const ToolGuardrailsPlugin: Plugin = async () => {
         const command = typeof args.command === 'string' ? args.command : '';
         if (!command) return;
 
-        // Block dev servers outside tmux
-        if (/npm run dev|pnpm dev|yarn dev|bun dev/.test(command)) {
+        // Block dev servers outside tmux (POSIX only — tmux doesn't exist on Windows)
+        if (process.platform !== 'win32' && /npm run dev|pnpm dev|yarn dev|bun dev/.test(command)) {
           if (!process.env.TMUX) {
             throw new Error(
               '[Hook] Dev server must run in tmux for log access\n' +
@@ -35,7 +35,7 @@ export const ToolGuardrailsPlugin: Plugin = async () => {
       if (input.tool === "write") {
         const filePath = typeof args.filePath === 'string' ? args.filePath : '';
 
-        // Block random .md files
+        // Block random .md/.txt files that aren't pack content or docs
         if (filePath && /\.(md|txt)$/.test(filePath)) {
             const fileName = filePath.split(/[/\\]/).pop() ?? '';
             const allowed = [
@@ -43,13 +43,16 @@ export const ToolGuardrailsPlugin: Plugin = async () => {
                 'AGENTS.md', 'MIGRATE_HOOKS.md', 'TODO.md'
             ];
 
-            // Allow files in .opencode/, docs/
-            const isAllowedDir = filePath.includes('/.opencode/') || filePath.includes('/docs/');
+            // Allow pack content dirs (skills/commands/agents), .opencode, docs
+            const segments = filePath.split(/[/\\]/);
+            const isAllowedDir = segments.includes('skills') || segments.includes('commands')
+              || segments.includes('agents') || segments.includes('.opencode')
+              || segments.includes('docs');
 
             if (!allowed.includes(fileName) && !isAllowedDir && !fileName.startsWith('CLAUDE')) {
                  throw new Error(
                     '[Hook] Unnecessary documentation file creation blocked. ' +
-                    'Use README.md or docs/ directory for documentation.'
+                    'Use README.md or the docs/ directory for documentation.'
                   );
             }
         }

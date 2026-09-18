@@ -36,7 +36,6 @@ permission:
   nuxt_*: allow
   nuxt-ui_*: allow
   playwright_*: allow
-  chrome-devtools_*: allow
   postman_*: allow
   sonarqube_*: allow
   task:

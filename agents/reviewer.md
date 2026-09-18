@@ -31,7 +31,6 @@ permission:
     "yarn *": allow
     "npx playwright*": allow
   playwright_*: allow
-  chrome-devtools_*: allow
 ---
 
 # Code Reviewer / QA Agent

@@ -1,9 +1,9 @@
 import type { Plugin } from "@opencode-ai/plugin"
 
 const CONSOLE_PATTERNS = [
-  /console\.log\(/g,
-  /console\.debug\(/g,
-  /console\.info\(/g,
+  /console\.log\(/,
+  /console\.debug\(/,
+  /console\.info\(/,
 ]
 
 const ALLOWED_PATTERNS = [

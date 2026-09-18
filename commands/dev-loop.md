@@ -22,11 +22,11 @@ The command automates this loop:
 
 ```
 1. START DEV SERVER   → portless <name> <command>  → https://<name>.localhost
-2. OPEN BROWSER       → chrome-devtools new_page + navigate_page
-3. INSPECT            → take_screenshot + take_snapshot + console/network check
+2. OPEN BROWSER       → playwright browser_navigate to the dev URL
+3. INSPECT            → playwright browser_take_screenshot + browser_snapshot + console/network check
 4. ANALYZE            → Compare UI against task requirements
 5. FIX                → Edit source code based on findings
-6. RELOAD             → chrome-devtools navigate_page (reload)
+6. RELOAD             → playwright browser_navigate (reload)
    └── LOOP back to step 3 until all issues are resolved
 7. DONE               → Report summary with screenshots
 ```
