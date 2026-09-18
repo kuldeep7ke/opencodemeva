@@ -102,7 +102,7 @@ Optional per-feature runtimes: any stack tool you actually develop with (python,
 
 ### Network
 
-- **First launch:** opencode downloads its model provider SDKs; enabled MCP servers are fetched on demand (`context7` is remote; `playwright`, `sequential-thinking` via `npx`; `memory` is a local binary — install it and adjust its path in `opencode.json`). Playwright drives your installed Chrome — no browser download required.
+- **First launch:** opencode downloads its model provider SDKs; enabled MCP servers are fetched on demand (`context7` is a local stdio bridge (`npx @upstash/context7-mcp`, used because the Config+SSL remote endpoint now only speaks Streamable HTTP); `playwright`, `sequential-thinking` via `npx`; `memory` is a local binary — install it and adjust its path in `opencode.json`). Playwright drives your installed Chrome — no browser download required.
 - **Runtime:** model API access required (Anthropic, OpenAI, or any provider configured in opencode).
 
 ---
@@ -207,7 +207,7 @@ Ships with safe defaults:
 - **LSP servers** — enabled (`"lsp": true`); opencode's built-in language servers start on demand when a matching file is opened (TypeScript, Python, Go, Rust, Java, C/C++, PHP, and more). Disable with `"lsp": false`.
 - **MCP servers** — a curated catalog of the most-used, open-source, officially recommended servers:
   - ✅ **enabled** (no keys, low context cost):
-    - `context7` — up-to-date library/framework docs (remote)
+    - `context7` — up-to-date library/framework docs (local stdio bridge to Context7; official remote endpoint dropped the SSE transport this pack used)
     - `playwright` — official cross-browser automation, headless, uses your installed Chrome (`--browser chrome`, no download)
     - `sequential-thinking` — structured multi-step reasoning
     - `memory` (codebase-memory-mcp) — local project knowledge graph: auto-indexes your code (functions, classes, call chains) and persists cross-session decisions (ADR records). The `/remember` + `/recall` commands route through it. See "[Enabling project memory](#enabling-project-memory)" below.
