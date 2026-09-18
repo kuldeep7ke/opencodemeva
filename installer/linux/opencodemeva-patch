@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# opencodemeva-patch - apply or remove the OpenCode Meva patch for the current user.
+set -u
+
+# When run via sudo, target the invoking user's config instead of /root.
+if [ "$(id -u)" -eq 0 ] && [ -n "${SUDO_USER:-}" ] && [ "$SUDO_USER" != "root" ]; then
+  SUDO_HOME="$(getent passwd "$SUDO_USER" | cut -d: -f6)"
+  if [ -n "$SUDO_HOME" ] && [ -z "${OPENCODE_CONFIG_TARGET:-}" ]; then
+    export OPENCODE_CONFIG_TARGET="$SUDO_HOME/.config/opencode"
+  fi
+fi
+
+exec /opt/opencodemeva/apply-patch.sh "$@"

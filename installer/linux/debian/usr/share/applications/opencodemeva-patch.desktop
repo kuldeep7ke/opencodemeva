@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=OpenCode Meva Patch
+Comment=Apply or remove the OpenCode Meva patch for opencode config
+Exec=opencodemeva-patch
+Icon=opencodemeva
+Terminal=true
+Categories=Development;Utility;

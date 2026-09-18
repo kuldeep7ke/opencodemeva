@@ -1,0 +1,14 @@
+Package: opencodemeva-patch
+Version: 2.2.1
+Section: utils
+Priority: optional
+Architecture: all
+Depends: bash, python3
+Maintainer: kuldeep7ke
+Description: OpenCode Meva style patch for opencode config
+  Installs the Everything Claude Code pack (agents, skills, commands, rules,
+  hooks, mcp-configs, workflows, plugins) into the user's opencode config
+  directory (~/.config/opencode) as a removable, unapply-capable patch.
+  The pack files live under /opt/opencodemeva/pack and the opencodemeva-patch
+  tool applies them for the invoking user. Run 'opencodemeva-patch --unapply'
+  to remove the patch again.

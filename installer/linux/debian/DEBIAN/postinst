@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+echo
+echo "OpenCode Meva Patch installed."
+echo "Run: opencodemeva-patch     (applies the pack to your ~/.config/opencode)"
+echo "     opencodemeva-patch -h  (for options)"
+echo
+exit 0
