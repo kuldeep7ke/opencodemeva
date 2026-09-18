@@ -96,7 +96,7 @@ If user does not specify mode, infer automatically from task size and risk.
 - **`security-review`** — Auth, input validation, secrets handling
 - **`tdd-workflow`** — Test-driven development
 - **`api-design`** — REST API design patterns
-- **`codebase-memory-mcp`** — Cross-session memory
+- **`memory`** — Cross-session memory
 
 ## Project Structure
 
@@ -191,7 +191,7 @@ For every task, end with:
 
 Load the following skills for domain-specific guidance:
 
-- `codebase-memory-mcp`
+- `memory`
 - `api-design`
 - `coding-standards`
 - `java-coding-standards`

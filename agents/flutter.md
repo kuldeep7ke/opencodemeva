@@ -229,7 +229,7 @@ Never create commits, PRs, or push unless explicitly asked. Before commit/PR, su
 
 ## Skills
 
-- `codebase-memory-mcp`
+- `memory`
 - `building-components`
 - `coding-standards`
 - `dart-add-unit-test`

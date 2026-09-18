@@ -199,7 +199,7 @@ If `postmanSync: true` or user explicitly requested: load `api-documentation` sk
 
 Load the following skills for domain-specific guidance:
 
-- `codebase-memory-mcp`
+- `memory`
 - `api-design`
 - `api-documentation`
 - `backend-patterns`

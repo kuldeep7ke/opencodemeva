@@ -1,11 +1,11 @@
 ---
-name: codebase-memory-mcp
-description: 'Persistent project memory via the codebase-memory-mcp knowledge graph: index repos, search symbols, trace call paths, read architecture, record ADR decisions. Use for cross-session continuity, codebase onboarding, impact analysis, and recall of past decisions.'
+name: memory
+description: 'Persistent project memory via the memory knowledge graph: index repos, search symbols, trace call paths, read architecture, record ADR decisions. Use for cross-session continuity, codebase onboarding, impact analysis, and recall of past decisions.'
 ---
 
-# Codebase Memory (codebase-memory-mcp)
+# Memory (memory)
 
-Provides persistent cross-session memory for coding agents using the **codebase-memory-mcp** knowledge graph. This is the pack's memory layer: it stores what the agent should know across sessions — code structure, call chains, hot paths, and architecture decisions — not what it can re-derive from reading files.
+Provides persistent cross-session memory for coding agents using the **memory** knowledge graph. This is the pack's memory layer: it stores what the agent should know across sessions — code structure, call chains, hot paths, and architecture decisions — not what it can re-derive from reading files.
 
 ## Principle
 
@@ -70,7 +70,7 @@ Subagents do NOT get direct graph access in shared contexts by default. The orch
 
 ## Fallback (graph unavailable)
 
-If `codebase-memory-mcp` tools are absent, fall back to:
+If `memory` tools are absent, fall back to:
 - Save decisions to `.opencode/memory/decision-<date>.md` and `docs/knowledge.md`
 - Recall by reading `.opencode/memory/` and `docs/knowledge.md`
-- Report: "codebase-memory-mcp offline — using file-based fallback"
+- Report: "memory offline — using file-based fallback"

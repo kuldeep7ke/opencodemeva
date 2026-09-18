@@ -1233,7 +1233,7 @@ _This agent orchestrates the development process by analyzing requirements, desi
 
 Load the following skills for domain-specific guidance:
 
-- `codebase-memory-mcp`
+- `memory`
 - `api-design`
 - `api-documentation`
 - `coding-standards`

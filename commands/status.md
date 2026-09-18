@@ -15,7 +15,7 @@ Invoke `/status` to produce a visual snapshot of all in-flight and pending tasks
 
 ## How It Works
 
-The agent recalls the current task state from `todowrite`, the project knowledge graph (`codebase-memory-mcp`), and git state, then presents a structured progress table:
+The agent recalls the current task state from `todowrite`, the project knowledge graph (`memory`), and git state, then presents a structured progress table:
 
 ```
 ## Progress Report

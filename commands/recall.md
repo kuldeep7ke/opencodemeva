@@ -2,7 +2,7 @@
 description: Usage
 ---
 
-Search past session observations, decisions, and lessons stored in the project knowledge graph (`codebase-memory-mcp`) for relevant context. Replaces the removed generic `memory` server — cross-session knowledge now lives in `codebase-memory-mcp` (code index + ADR records + notes).
+Search past session observations, decisions, and lessons stored in the project knowledge graph (`memory`) for relevant context. Replaces the removed generic `memory` server — cross-session knowledge now lives in `memory` (code index + ADR records + notes).
 
 ## Usage
 
@@ -12,7 +12,7 @@ Search past session observations, decisions, and lessons stored in the project k
 
 ## Instructions
 
-1. Query the `codebase-memory-mcp` server:
+1. Query the `memory` server:
    - `search_graph` over the indexed codebase for matching functions, classes, and relationships relevant to the query.
    - ADR/decision lookup for architecture choices tagged with the query's concepts.
    - Any notes/observations already stored for this project.

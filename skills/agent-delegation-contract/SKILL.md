@@ -53,7 +53,7 @@ interface Output {
 {budget constraints, performance targets, security requirements, naming conventions}
 
 ### Memory Context
-{relevant recall from codebase-memory-mcp — user preferences, past decisions, conventions}
+{relevant recall from memory — user preferences, past decisions, conventions}
 
 ### Verification Criteria
 {how to verify the work is correct: build, lint, test, manual checks}
@@ -66,7 +66,7 @@ interface Output {
 
 ```
 ┌─────────────┐    1. Recall memory     ┌─────────────┐
-│  IT Leader  │ ──────────────────────▶  │ codebase-memory-mcp │
+│  IT Leader  │ ──────────────────────▶  │ memory │
 │             │ ◀──────────────────────  │             │
 │             │    2. Load memory        │             │
 │             │         context          └─────────────┘
@@ -147,7 +147,7 @@ Expected Output:
 
 ### 5. Memory Context
 
-The IT Leader recalls from codebase-memory-mcp and includes the relevant synthesis:
+The IT Leader recalls from memory and includes the relevant synthesis:
 
 ```
 Memory Context:
@@ -195,7 +195,7 @@ Every subagent MUST return results in this exact format:
 {any changes to the contract — explain why}
 
 ### New Findings for Memory
-{anything discovered that should be saved to codebase-memory-mcp:
+{anything discovered that should be saved to memory:
 - conventions discovered
 - bugs encountered
 - decisions made
@@ -211,7 +211,7 @@ If a subagent violates the contract (edits out-of-scope files, changes types wit
 
 1. Flag the violation clearly in the "Deviations" section
 2. The IT Leader reviews and decides: accept deviation, revert, or re-delegate
-3. If intentional, add reasoning to codebase-memory-mcp as a learned convention
+3. If intentional, add reasoning to memory as a learned convention
 
 ## Sequential Delegation (Chaining)
 

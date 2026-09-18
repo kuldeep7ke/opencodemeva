@@ -191,7 +191,7 @@ Use structured question tool for all clarifications. Include a "Custom answer" f
 
 Load the following skills for domain-specific guidance:
 
-- `codebase-memory-mcp`
+- `memory`
 - `coding-standards`
 - `rust-patterns`
 - `rust-testing`

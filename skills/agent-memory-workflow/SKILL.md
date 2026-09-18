@@ -1,15 +1,15 @@
 ---
 name: agent-memory-workflow
-description: 'Consistent cross-session memory protocol: mandatory recall at session start, structured save at session end, memory categories, auto-save triggers, and memory audit procedures. Memory layer: codebase-memory-mcp.'
+description: 'Consistent cross-session memory protocol: mandatory recall at session start, structured save at session end, memory categories, auto-save triggers, and memory audit procedures. Memory layer: memory.'
 ---
 
 # Agent Memory Workflow
 
-Protocols for persistent cross-session memory using the **codebase-memory-mcp** knowledge graph as the memory layer. This skill turns the graph + ADR records from an optional tool into a disciplined, reliable memory system.
+Protocols for persistent cross-session memory using the **memory** knowledge graph as the memory layer. This skill turns the graph + ADR records from an optional tool into a disciplined, reliable memory system.
 
 ## Core Principle
 
-Treat codebase-memory-mcp as the agent's **external hippocampus** — it stores what the agent should know across sessions (structure, decisions, conventions), not what it can re-derive from the codebase. The goal is continuity: the user should never have to repeat preferences, past decisions, or discovered conventions.
+Treat memory as the agent's **external hippocampus** — it stores what the agent should know across sessions (structure, decisions, conventions), not what it can re-derive from the codebase. The goal is continuity: the user should never have to repeat preferences, past decisions, or discovered conventions.
 
 ## Memory Categories
 
@@ -114,8 +114,8 @@ Before every save, check whether the same information already exists (search gra
 
 ## Edge Cases
 
-### No codebase-memory-mcp server
-If the tools are absent, fall back to file-based memory (`.opencode/memory/` + `docs/knowledge.md`) and report: "codebase-memory-mcp offline — using file-based fallback".
+### No memory server
+If the tools are absent, fall back to file-based memory (`.opencode/memory/` + `docs/knowledge.md`) and report: "memory offline — using file-based fallback".
 
 ### First session ever
 If no prior context is found, skip the full recall ritual and note: "Fresh project — no prior memory. Starting clean."

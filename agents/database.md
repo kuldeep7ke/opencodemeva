@@ -199,7 +199,7 @@ Never commit/PR unless user explicitly asks. Before commit, summarize staged cha
 
 Load for domain-specific guidance:
 
-- `codebase-memory-mcp` • `api-design` • `backend-patterns` • `coding-standards`
+- `memory` • `api-design` • `backend-patterns` • `coding-standards`
 - `database-migrations` • `error-handling` • `mysql-patterns` • `postgres-patterns`
 - `postgres-prisma-optimization` • `prisma-patterns` • `redis-patterns` • `security-review`
 

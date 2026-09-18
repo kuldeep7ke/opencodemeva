@@ -178,7 +178,7 @@ npx nx run <project>:test         # Run tests in Nx monorepo
 
 Load the following skills for domain-specific guidance:
 
-- `codebase-memory-mcp`
+- `memory`
 - `angular-developer`
 - `building-components`
 - `coding-standards`

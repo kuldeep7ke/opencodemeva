@@ -116,7 +116,7 @@ pytest --cov --cov-report=term-missing
 
 ## Skills
 
-- `codebase-memory-mcp`
+- `memory`
 - `coding-standards`
 - `python-patterns`
 - `python-testing`

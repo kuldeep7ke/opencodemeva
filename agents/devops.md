@@ -185,7 +185,7 @@ _This agent ensures reliable, secure, and efficient software delivery by designi
 
 ## Skills
 
-- `codebase-memory-mcp`
+- `memory`
 - `api-design`
 - `backend-patterns`
 - `coding-standards`

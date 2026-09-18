@@ -103,7 +103,7 @@ Status emoji convention:
 
 When starting a new session after previous work was done, reconstruct task state:
 
-1. **Check codebase-memory-mcp**: `search_graph(query: "task-status")` and `manage_adr (mode: sections)` — restore decisions and any recorded state from prior sessions
+1. **Check memory**: `search_graph(query: "task-status")` and `manage_adr (mode: sections)` — restore decisions and any recorded state from prior sessions
 2. **Check file-based fallback**: Read `.opencode/memory/task-status.json` if the graph is unavailable
 3. **Infer from codebase**: Check recent git commits, modified files, open branches
 4. **Report to user**: "I see you were working on X. Last status was: [summary]. Shall I continue?"
@@ -173,4 +173,4 @@ The `.opencode/commands/` directory includes commands for common progress action
 Invoke to produce a visual progress report and check for blocked tasks.
 
 ### `/continue` 
-Invoke after session resume to reconstruct task state from codebase-memory-mcp / memory files and report to user.
+Invoke after session resume to reconstruct task state from memory / memory files and report to user.

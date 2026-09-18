@@ -63,7 +63,7 @@
       "command": ["npx", "-y", "@playwright/mcp", "--headless", "--browser", "chrome"],
       "enabled": true
     },
-    "codebase-memory-mcp": {
+    "memory": {
       "type": "local",
       "command": ["C:/Users/Admin/AppData/Local/Programs/codebase-memory-mcp/codebase-memory-mcp.exe"],
       "enabled": true

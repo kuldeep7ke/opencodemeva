@@ -164,7 +164,7 @@ Use the question tool for any clarification or choice.
 
 Load the following skills for domain-specific guidance:
 
-- `codebase-memory-mcp`
+- `memory`
 - `ai-regression-testing`
 - `coding-standards`
 - `data-scraper-agent`

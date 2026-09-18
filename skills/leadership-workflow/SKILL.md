@@ -282,7 +282,7 @@ Action Items:
 - [ ] {actionable improvement}
 ```
 
-### Save Lessons to codebase-memory-mcp
+### Save Lessons to memory
 
 ```
 memory_lesson_save content="{lesson learned}" context="{project / feature context}" confidence=0.7 tags="retrospective,{domain}"
@@ -322,7 +322,7 @@ todowrite todos: [{ content: "Task {ID}: {description}", status: "completed", pr
 
 ### Cross-Session Persistence
 
-Save project state to codebase-memory-mcp at session end:
+Save project state to memory at session end:
 
 ```
 memory_save content="Project {name} — Phase {N} complete. Remaining: {task list}. Next step: {plan}." type="workflow" project="{project-slug}"
@@ -385,7 +385,7 @@ Delivered:
 
 Architecture Decisions:
 
-- {key decisions captured in codebase-memory-mcp}
+- {key decisions captured in memory}
 
 Knowledge Transfer:
 

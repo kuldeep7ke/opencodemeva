@@ -180,7 +180,7 @@ questions: [
 
 ## Skills
 
-- `codebase-memory-mcp`
+- `memory`
 - `android-kotlin-compose`
 - `android-jetpack-compose`
 - `building-components`

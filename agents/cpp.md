@@ -272,7 +272,7 @@ questions:
 
 Load the following skills for domain-specific guidance:
 
-- `codebase-memory-mcp`
+- `memory`
 - `coding-standards`
 - `cpp-coding-standards`
 - `cpp-testing`

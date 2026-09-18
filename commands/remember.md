@@ -2,7 +2,7 @@
 description: Usage
 ---
 
-Explicitly save an insight, decision, or learning to the project knowledge graph (`codebase-memory-mcp`) for future sessions. Replaces the removed generic `memory` server — the pack now persists cross-session knowledge through `codebase-memory-mcp` (automatic code index + ADR records).
+Explicitly save an insight, decision, or learning to the project knowledge graph (`memory`) for future sessions. Replaces the removed generic `memory` server — the pack now persists cross-session knowledge through `memory` (automatic code index + ADR records).
 
 ## Usage
 
@@ -15,7 +15,7 @@ Explicitly save an insight, decision, or learning to the project knowledge graph
 1. Analyze what needs to be remembered — extract the core insight, decision, or fact.
 2. Extract 2-5 searchable concepts (lowercased keyword phrases). Prefer specific terms ("jwt-refresh-rotation" over "auth").
 3. Extract relevant file paths the memory references.
-4. Persist via the `codebase-memory-mcp` server:
+4. Persist via the `memory` server:
    - If the memory is an architecture/design decision, record it with `manage_adr` (title + status + context + decision).
    - Otherwise store it as a knowledge-graph note (via the server's store/query tools) with:
      - `content` — full text to remember (preserve user's phrasing)

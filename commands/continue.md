@@ -19,7 +19,7 @@ The command runs a 3-step recovery protocol:
 
 ### Step 1: Recall Memory Context
 
-Query the project knowledge graph (`codebase-memory-mcp`) and recent state for context:
+Query the project knowledge graph (`memory`) and recent state for context:
 1. `search_graph` / `get_architecture` over the indexed codebase — restore module structure and conventions
 2. `git log --oneline -5` + `git status` — reconstruct what the last session changed
 3. Review ADR records (via `manage_adr`) — restore architecture decisions from previous sessions
@@ -63,4 +63,4 @@ Shall I continue with BE-002 (validation middleware)?
 This command relies on:
 - `agent-memory-workflow` skill — for the session start recall ritual
 - `progress-tracking` skill — for task status recovery
-- `codebase-memory-mcp` — for persistent project knowledge (code index + ADR records)
+- `memory` — for persistent project knowledge (code index + ADR records)

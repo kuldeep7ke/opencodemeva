@@ -111,5 +111,5 @@ cmake --build build && ctest --test-dir build
 
 ## Skills
 
-- `codebase-memory-mcp`
+- `memory`
 - `coding-standards`

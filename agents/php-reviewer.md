@@ -111,5 +111,5 @@ composer audit
 
 ## Skills
 
-- `codebase-memory-mcp`
+- `memory`
 - `coding-standards`

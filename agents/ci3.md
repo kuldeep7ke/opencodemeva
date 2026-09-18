@@ -171,7 +171,7 @@ For every task, respond with:
 
 Load the following skills for domain-specific guidance:
 
-- `codebase-memory-mcp`
+- `memory`
 - `api-documentation`
 - `ci3-rest-api`
 - `coding-standards`

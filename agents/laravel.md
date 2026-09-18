@@ -314,7 +314,7 @@ _This agent builds complete Laravel websites — from database migrations and AP
 
 Load the following skills for domain-specific guidance:
 
-- `codebase-memory-mcp`
+- `memory`
 - `api-documentation`
 - `coding-standards`
 - `laravel-service-repository`

@@ -10,7 +10,7 @@ Searching for "opencode config", "opencode agents", "opencode skills", or an "ev
 - **83 slash commands** (`/plan`, `/tdd`, `/code-review`, `/security`, `/build-fix`, `/e2e`, ...) for repeatable agent workflows
 - **295 skill packages** — patterns, workflows, and audits across every major stack
 - **9 plugins** — secret protection, dangerous-command blocking, type checking, session summaries, and more
-- **Preconfigured MCP servers** — Context7, Playwright, sequential-thinking, and codebase-memory-mcp (project knowledge graph + persistent decisions, replacing the generic memory server)
+- **Preconfigured MCP servers** — Context7, Playwright, sequential-thinking, and memory (codebase-memory-mcp: project knowledge graph + persistent decisions)
 - **Built-in LSP servers** — editor-grade diagnostics and navigation feedback for the agent across TypeScript, Python, Go, Rust, Java, C/C++, PHP, and more (started on demand)
 
 ---
@@ -102,7 +102,7 @@ Optional per-feature runtimes: any stack tool you actually develop with (python,
 
 ### Network
 
-- **First launch:** opencode downloads its model provider SDKs; enabled MCP servers are fetched on demand (`context7` is remote; `playwright`, `sequential-thinking` via `npx`; `codebase-memory-mcp` is a local binary — install it and adjust its path in `opencode.json`). Playwright drives your installed Chrome — no browser download required.
+- **First launch:** opencode downloads its model provider SDKs; enabled MCP servers are fetched on demand (`context7` is remote; `playwright`, `sequential-thinking` via `npx`; `memory` is a local binary — install it and adjust its path in `opencode.json`). Playwright drives your installed Chrome — no browser download required.
 - **Runtime:** model API access required (Anthropic, OpenAI, or any provider configured in opencode).
 
 ---
@@ -181,7 +181,7 @@ Type `@` and pick an agent, or call one directly:
 /build-fix
 /e2e
 /verify   # run the project's verification loop before claiming done
-/remember /recall   # store & recall project knowledge via codebase-memory-mcp
+/remember /recall   # store & recall project knowledge via memory
 /status   # visual progress snapshot
 ```
 
@@ -210,18 +210,18 @@ Ships with safe defaults:
     - `context7` — up-to-date library/framework docs (remote)
     - `playwright` — official cross-browser automation, headless, uses your installed Chrome (`--browser chrome`, no download)
     - `sequential-thinking` — structured multi-step reasoning
-    - `codebase-memory-mcp` — local project knowledge graph: auto-indexes your code (functions, classes, call chains) and persists cross-session decisions (ADR records). Replaces the generic `memory` server, and the `/remember` + `/recall` commands route through it. See "[Enabling project memory](#enabling-project-memory)" below.
+    - `memory` (codebase-memory-mcp) — local project knowledge graph: auto-indexes your code (functions, classes, call chains) and persists cross-session decisions (ADR records). The `/remember` + `/recall` commands route through it. See "[Enabling project memory](#enabling-project-memory)" below.
   - ❌ **configured, disabled by default** — flip `"enabled": true` when needed:
     - `firecrawl` — web scraping (needs `FIRECRAWL_API_KEY`)
     - `postgres` — official Postgres server (needs `DATABASE_URI`)
     - `sentry` — error/issues context (official OAuth remote)
 
-### Enabling project memory (codebase-memory-mcp)
+### Enabling project memory (memory)
 
-`codebase-memory-mcp` is the pack's single memory server (the generic `server-memory` was removed as redundant). It indexes the repo into a searchable knowledge graph and persists architecture decisions/notes across sessions — the `/remember` and `/recall` commands route through it.
+The pack's single memory server is exposed in config as `memory` (binary: `codebase-memory-mcp`; the generic `server-memory` was removed as redundant). It indexes the repo into a searchable knowledge graph and persists architecture decisions/notes across sessions — the `/remember` and `/recall` commands route through it.
 
 1. Install the `codebase-memory-mcp` binary on your machine (this repo uses a Windows build at `C:\Users\Admin\AppData\Local\Programs\codebase-memory-mcp\`).
-2. Adjust the `command` path of the `codebase-memory-mcp` entry in `opencode.json` to your install location (or remove the entry to rely on a global config).
+2. Adjust the `command` path of the `memory` entry in `opencode.json` to your install location (or remove the entry to rely on a global config).
 3. Index your projects with `/index-repository` (or the server's `index_repository` tool), then use `/remember` and `/recall`.
 
 ### GitHub (no MCP needed)
@@ -384,7 +384,7 @@ Merge rules (baked into `scripts/merge.mjs`):
 | **How do I install opencode agents, commands, and skills?** | Copy the pack into `~/.config/opencode/` (plus `opencode.json`) and restart opencode. OpenCode auto-detects it. See [Installation](#installation). |
 | **Does this work with Claude Code?** | Skills use the portable SKILL.md format shared with Claude Code and other AI coding CLIs, but the pack is *packaged for opencode*. Use it to bootstrap or extend an opencode setup. |
 | **Which stacks are covered?** | Next.js, React, Nuxt, Vue, Node.js, Django, FastAPI, Laravel, CodeIgniter, Spring Boot, Rust, Go, Python, C#, Flutter, Android/Kotlin, Swift, C++, Angular — plus review, security, TDD, E2E, refactoring, SEO, and database specialists. |
-| **What MCP servers are included?** | Enabled by default: Context7 (live docs), Playwright (installed Chrome), sequential-thinking, codebase-memory-mcp (project knowledge graph + persistent decisions). Opt-in: Firecrawl, Postgres, Sentry. See [Configuration](#configuration). |
+| **What MCP servers are included?** | Enabled by default: Context7 (live docs), Playwright (installed Chrome), sequential-thinking, memory (codebase-memory-mcp: project knowledge graph + persistent decisions). Opt-in: Firecrawl, Postgres, Sentry. See [Configuration](#configuration). |
 | **How big is the pack?** | 54 agents, 83 commands, 295 skills, 9 plugins — every component validated with `npm run validate`. |
 
 ---

@@ -81,7 +81,7 @@ You are a **senior frontend developer** with deep expertise in Nuxt.js, Vue 3, a
 - **`tdd-workflow`** — Writing tests or TDD
 - **`browser-qa`** — E2E testing with Playwright
 - **`vercel-composition-patterns`** — Refactoring complex components
-- **`codebase-memory-mcp`** — Cross-session memory
+- **`memory`** — Cross-session memory
 
 ## MCP (Model Context Protocol) Integration
 
@@ -336,7 +336,7 @@ _This agent definition combines technical expertise with design sensibility and 
 
 Available skills (see Technical Skills Integration above for when to load):
 
-- `codebase-memory-mcp` — Cross-session memory
+- `memory` — Cross-session memory
 - `building-components` — Component spec patterns
 - `coding-standards` — Universal coding standards
 - `frontend-patterns` — Modern Vue/Nuxt patterns
