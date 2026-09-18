@@ -1,0 +1,16 @@
+{
+  "name": "opencodemeva",
+  "version": "1.0.0",
+  "description": "All-in-one opencode config pack: 54 agents, 83 commands, 295 skills, 9 plugins. Merged from 6 everything-opencode style open-source repos.",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs .",
+    "merge": "node scripts/merge.mjs",
+    "build": "npm run validate && npm pack"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

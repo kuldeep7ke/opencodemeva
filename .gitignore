@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+sources/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# Deploy artifacts
+*.tgz
+
+# Local opencode state
+.opencode/

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["./AGENTS.md"],
+  "lsp": true,
+  "plugin": [
+    "./plugins/console-log-warning.ts",
+    "./plugins/dangerous-command-blocker.ts",
+    "./plugins/env-protection.ts",
+    "./plugins/notification.ts",
+    "./plugins/pr-helper.ts",
+    "./plugins/pre-commit-check.ts",
+    "./plugins/session-summary.ts",
+    "./plugins/tool-guardrails.ts",
+    "./plugins/type-checker.ts"
+  ],
+  "permission": {
+    "read": {
+      "*": "allow",
+      "**/.env": "deny",
+      "**/.env.*": "deny",
+      "**/.env.example": "allow"
+    },
+    "edit": {
+      "*": "allow",
+      "**/.env*": "deny"
+    },
+    "bash": {
+      "*": "ask",
+      "git *": "allow",
+      "git status": "allow",
+      "git log *": "allow",
+      "git diff *": "allow",
+      "git branch *": "allow",
+      "ls *": "allow",
+      "pwd": "allow",
+      "which *": "allow",
+      "whoami": "allow",
+      "echo *": "allow"
+    },
+    "external_directory": {
+      "*": "allow",
+      "~/.ssh/**": "deny",
+      "~/.aws/**": "deny",
+      "~/.gnupg/**": "deny",
+      "~/.kube/**": "deny",
+      "~/.docker/**": "deny",
+      "~/secrets/**": "deny"
+    },
+    "webfetch": "allow",
+    "websearch": "allow",
+    "todowrite": "allow",
+    "question": "allow",
+    "doom_loop": "ask"
+  },
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "-y", "@playwright/mcp", "--headless", "--browser", "chrome"],
+      "enabled": true
+    },
+    "memory": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-memory"],
+      "enabled": true
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "enabled": true
+    },
+    "firecrawl": {
+      "type": "local",
+      "command": ["npx", "-y", "firecrawl-mcp"],
+      "environment": { "FIRECRAWL_API_KEY": "{env:FIRECRAWL_API_KEY}" },
+      "enabled": false
+    },
+    "postgres": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-postgres"],
+      "environment": { "DATABASE_URI": "{env:DATABASE_URI}" },
+      "enabled": false
+    },
+    "sentry": {
+      "type": "remote",
+      "url": "https://mcp.sentry.dev/mcp",
+      "oauth": {},
+      "enabled": false
+    }
+  }
+}
