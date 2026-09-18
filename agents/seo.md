@@ -186,7 +186,7 @@ End every task with:
 ## Skills
 
 Load these skills for domain-specific guidance:
-- `agentmemory` — Cross-session memory
+- `codebase-memory-mcp` — Cross-session memory
 - `web-design-guidelines` — General web design principles
 - `accessibility` — WCAG guidelines
 - `impeccable` — Design intelligence (when SEO intersects with UX/content)

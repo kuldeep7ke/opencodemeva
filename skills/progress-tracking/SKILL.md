@@ -103,30 +103,26 @@ Status emoji convention:
 
 When starting a new session after previous work was done, reconstruct task state:
 
-1. **Check agentmemory**: `memory_recall(query: "task-status")` or `memory_smart_search(query: "progress tracking current state")`
-2. **Check file-based fallback**: Read `.opencode/memory/task-status.json` if agentmemory is unavailable
+1. **Check codebase-memory-mcp**: `search_graph(query: "task-status")` and `manage_adr (mode: sections)` — restore decisions and any recorded state from prior sessions
+2. **Check file-based fallback**: Read `.opencode/memory/task-status.json` if the graph is unavailable
 3. **Infer from codebase**: Check recent git commits, modified files, open branches
 4. **Report to user**: "I see you were working on X. Last status was: [summary]. Shall I continue?"
 
 ### Task Status Save Format (for session end / checkpoint)
 
-Save to agentmemory (or file fallback) at every significant checkpoint:
+Save the task state (graph note via `manage_adr` or file fallback) at every significant checkpoint:
 
 ```javascript
-memory_save(
-  content: JSON.stringify({
-    timestamp: "2025-03-21T14:30:00Z",
-    active_tasks: [
-      { id: "BE-002", status: "in_progress", description: "Build notification API" },
-      { id: "FE-001", status: "todo", description: "NotificationBell component", depends_on: "BE-002" }    
-    ],
-    completed_tasks: ["DB-001"],
-    blocked_tasks: []
-  }),
-  concepts: ["task-status", "progress", "current-state"],
-  files: [],
-  type: "session"
-)
+// File fallback: .opencode/memory/task-status.json
+writeFileSync(".opencode/memory/task-status.json", JSON.stringify({
+  timestamp: "2025-03-21T14:30:00Z",
+  active_tasks: [
+    { id: "BE-002", status: "in_progress", description: "Build notification API" },
+    { id: "FE-001", status: "todo", description: "NotificationBell component", depends_on: "BE-002" }    
+  ],
+  completed_tasks: ["DB-001"],
+  blocked_tasks: []
+}, null, 2))
 ```
 
 ## Cross-Agent Status Protocol
@@ -177,4 +173,4 @@ The `.opencode/commands/` directory includes commands for common progress action
 Invoke to produce a visual progress report and check for blocked tasks.
 
 ### `/continue` 
-Invoke after session resume to reconstruct task state from agentmemory and report to user.
+Invoke after session resume to reconstruct task state from codebase-memory-mcp / memory files and report to user.

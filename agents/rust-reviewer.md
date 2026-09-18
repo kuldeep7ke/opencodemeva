@@ -111,7 +111,7 @@ cargo miri test && cargo udeps
 
 ## Skills
 
-- `agentmemory`
+- `codebase-memory-mcp`
 - `coding-standards`
 - `rust-patterns`
 - `rust-testing`

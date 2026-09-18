@@ -186,7 +186,7 @@ All Small criteria met, clear implementation notes, validation performed, follow
 
 Load the following skills for domain-specific guidance:
 
-- `agentmemory`
+- `codebase-memory-mcp`
 - `coding-standards`
 - `swift-actor-persistence`
 - `swift-concurrency-6-2`

@@ -227,7 +227,7 @@ OPEN → SCANNED → TODO_CREATED → DELEGATED → FIX_APPLIED → RE_SCANNED �
 
 Load the following skills for domain-specific guidance:
 
-- `agentmemory`
+- `codebase-memory-mcp`
 - `coding-standards`
 - `security-review`
 - `sonarqube-triage`

@@ -111,5 +111,5 @@ cmake --build build && ctest --test-dir build
 
 ## Skills
 
-- `agentmemory`
+- `codebase-memory-mcp`
 - `coding-standards`

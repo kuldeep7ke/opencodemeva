@@ -23,6 +23,15 @@ const plugin: Plugin = async (context) => {
 
       try {
         const { $ } = context
+
+        // Skip projects without TypeScript config — avoids spurious TS18003 spam
+        // on config-only repos (e.g. this pack) when a .ts file is edited.
+        const hasTsconfig = (await $`test -f tsconfig.json`.nothrow().quiet()).exitCode === 0
+        if (!hasTsconfig) {
+          modifiedTsFiles.clear()
+          return
+        }
+
         console.log(`\n🔍 Running TypeScript check on ${modifiedTsFiles.size} modified files...`)
 
         const result = await $`npx tsc --noEmit`

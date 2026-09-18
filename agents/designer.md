@@ -592,7 +592,7 @@ _This agent defines visual and experiential quality by creating design systems, 
 
 Available skills (load per task — see Skill Loading Guidelines above):
 
-- `agentmemory` — Cross-session memory
+- `codebase-memory-mcp` — Cross-session memory
 - `building-components` — Component spec patterns
 - `impeccable` — Design intelligence, critique, foundations
 - `nuxt-ui` — Nuxt UI component reference

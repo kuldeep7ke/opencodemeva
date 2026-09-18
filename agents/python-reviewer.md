@@ -116,7 +116,7 @@ pytest --cov --cov-report=term-missing
 
 ## Skills
 
-- `agentmemory`
+- `codebase-memory-mcp`
 - `coding-standards`
 - `python-patterns`
 - `python-testing`

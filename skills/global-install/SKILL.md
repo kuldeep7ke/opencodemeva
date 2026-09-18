@@ -109,7 +109,7 @@ $ opencode-agent-kit init --global
   → Merging configuration into opencode.jsonc...
   → Installing OpenCode dependencies...
   ✓ Dependencies installed
-  ✓ agentmemory already installed
+  ✓ codebase-memory-mcp already installed
   ✓ portless already installed
 
   ✅ opencode-agent-kit v1.3.5 installed globally!
@@ -124,7 +124,7 @@ $ opencode-agent-kit init --global
     • hooks/               — Automation hooks
     • rules/               — Scoped coding rules
     • opencode.jsonc       — Merged configuration
-    • agentmemory (global) — Persistent memory
+    • codebase-memory-mcp (global) — Persistent memory index
     • portless (global)    — Dev server URLs
 
   Next: OpenCode will automatically use this config.
@@ -182,7 +182,7 @@ $ opencode-agent-kit global update
   → Checking latest version...
   → Current: v1.3.4 → Latest: v1.3.5
   → Updating global install...
-  → Updating agentmemory and portless...
+  → Updating codebase-memory-mcp and portless...
 
   ✅ Global install updated to v1.3.5!
 ```
@@ -204,8 +204,8 @@ During global install, **all `.opencode/` references in the config are rewritten
 |---|---|---|
 | `instructions[]` | `.opencode/instructions/INSTRUCTIONS.md` | `/Users/user/.config/opencode/instructions/INSTRUCTIONS.md` |
 | `agent.*.prompt` | `{file:.opencode/prompts/agents/...}` | `{file:/Users/user/.config/opencode/prompts/agents/...}` |
-| `mcp.*.command[]` | `.opencode/hooks/agentmemory-start.mjs` | `/Users/user/.config/opencode/hooks/agentmemory-start.mjs` |
-| `plugin[]` | `.opencode/plugins/agentmemory-capture.ts` | `/Users/user/.config/opencode/plugins/agentmemory-capture.ts` |
+| `mcp.*.command[]` | `.opencode/hooks/codebase-memory-mcp-start.mjs` | `/Users/user/.config/opencode/hooks/codebase-memory-mcp-start.mjs` |
+| `plugin[]` | `.opencode/plugins/codebase-memory-mcp-capture.ts` | `/Users/user/.config/opencode/plugins/codebase-memory-mcp-capture.ts` |
 
 **Why absolute?** OpenCode resolves paths in `opencode.jsonc` relative to the **current project directory**, not relative to `~/.config/opencode/`. Relative paths would fail in every project. Absolute paths guarantee the files are found regardless of where you run `opencode`.
 

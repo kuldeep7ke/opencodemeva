@@ -50,6 +50,7 @@ const SECRET_PATTERNS = [
   /api[_-]?key\s*[:=]\s*["'][a-zA-Z0-9]{20,}["']/i,
   /secret[_-]?key\s*[:=]\s*["'][a-zA-Z0-9]{20,}["']/i,
   /password\s*[:=]\s*["'][^"']{8,}["']/i,
+  /(api[_-]?key|secret[_-]?key|password|passwd|pwd|token)\s*[:=]\s*[^\s"'`]{12,}/i,
   /AKIA[0-9A-Z]{16}/,  // AWS Access Key
   /-----BEGIN (RSA |DSA |EC )?PRIVATE KEY-----/,
 ]

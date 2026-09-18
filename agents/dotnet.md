@@ -207,7 +207,7 @@ questions: [{ header: "Features", question: "Which features?", multiple: true, o
 
 Load the following skills for domain-specific guidance:
 
-- `agentmemory`
+- `codebase-memory-mcp`
 - `coding-standards`
 - `csharp-testing`
 - `dotnet-patterns`

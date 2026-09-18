@@ -1,91 +1,60 @@
 ---
 name: agent-memory-workflow
-description: 'Consistent cross-session memory protocol: mandatory recall at session start, structured save at session end, memory categories, auto-save triggers, and memory audit procedures.'
+description: 'Consistent cross-session memory protocol: mandatory recall at session start, structured save at session end, memory categories, auto-save triggers, and memory audit procedures. Memory layer: codebase-memory-mcp.'
 ---
 
 # Agent Memory Workflow
 
-Protocols for persistent cross-session memory using the agentmemory MCP server. This skill turns agentmemory from an optional tool into a disciplined, reliable memory layer.
+Protocols for persistent cross-session memory using the **codebase-memory-mcp** knowledge graph as the memory layer. This skill turns the graph + ADR records from an optional tool into a disciplined, reliable memory system.
 
 ## Core Principle
 
-Treat agentmemory as the agent's **external hippocampus** — it stores what the agent should know across sessions, not what it can re-derive from the codebase. The goal is continuity: the user should never have to repeat preferences, past decisions, or discovered conventions.
+Treat codebase-memory-mcp as the agent's **external hippocampus** — it stores what the agent should know across sessions (structure, decisions, conventions), not what it can re-derive from the codebase. The goal is continuity: the user should never have to repeat preferences, past decisions, or discovered conventions.
 
 ## Memory Categories
 
-Organise memories into 5 stable categories. Every save MUST specify exactly one `type`:
+Every durable decision gets recorded. Category conventions:
 
-| Category | `type` field | What goes in | Retention |
-|----------|-------------|--------------|-----------|
-| User Preferences | `preference` | Style choices (verbose/minimal), framework versions, component lib, naming conventions | Permanent |
-| Architecture | `architecture` | Technology decisions, library choices, data flow design, why-X-over-Y | Permanent |
-| Project Convention | `convention` | Code patterns, folder structure, naming rules, import style, error handling pattern | Permanent |
-| Bug / Lesson | `lesson` | Non-obvious bugs found, debugging strategies, specific pitfalls, workarounds | Permanent |
-| Session Log | `session` | What was done this session, files touched, current state | Volatile (overwritten) |
+| Category | Where it lives |
+|----------|---------------|
+| User Preferences | `docs/knowledge.md` or `.opencode/memory/preferences.md` |
+| Architecture | ADR via `manage_adr` (mode: update) |
+| Project Convention | ADR via `manage_adr` or `docs/knowledge.md` |
+| Bug / Lesson | `.opencode/memory/lessons.md` (linked into ADR) |
+| Session Log | `.opencode/memory/session-<date>.md` (volatile, overwritten) |
+| Code structure | the graph itself — re-derive with search_graph / trace_path |
 
-### Example saves per type
+### Example saves
 
-```javascript
-// preference
-memory_save(
-  content: "User prefers minimal console output, one-line status per change.",
-  concepts: ["preference", "output-style", "verbose-level"],
-  files: [],
-  type: "preference"
-)
+```text
+# architecture → as an ADR section
+manage_adr(mode: update, content: "Chose Zod over Yup because Zod has better
+  TypeScript inference and edge runtime support (src/lib/validation.ts).")
 
-// architecture
-memory_save(
-  content: "Chose Zod over Yup because Zod has better TypeScript inference and edge runtime support.",
-  concepts: ["validation", "zod", "typescript", "edge-runtime"],
-  files: ["src/lib/validation.ts"],
-  type: "architecture"
-)
+# convention → as an ADR section
+manage_adr(mode: update, content: "All API service files go under
+  src/services/ with singular names (auth.service.ts, market.service.ts).")
 
-// convention
-memory_save(
-  content: "All API service files go under src/services/ with singular names (auth.service.ts, market.service.ts).",
-  concepts: ["convention", "folder-structure", "services"],
-  files: ["src/services/auth.service.ts"],
-  type: "convention"
-)
+# lesson / preference → file-backed notes
+Write .opencode/memory/lessons.md — "Nuxt 4 auto-imports: components/ are
+  auto-imported but NOT recursively; nested dirs need manual export."
 
-// lesson
-memory_save(
-  content: "Nuxt 4 auto-imports: components in components/ are auto-imported but NOT recursively. Nested dirs need manual export.",
-  concepts: ["nuxt4", "auto-import", "components"],
-  files: ["nuxt.config.ts"],
-  type: "lesson"
-)
-
-// session — always overwrite the same concept key so only one session entry exists
-memory_save(
-  content: "Session 2025-03-21: Implemented market card component, refactored auth middleware. Next: notification system.",
-  concepts: ["session-log", "current-state"],
-  files: [],
-  type: "session"
-)
+# session log — always overwrite the same file
+Write .opencode/memory/session-<date>.md — what was done, files touched, next steps.
 ```
 
 ## Session Start Ritual (MANDATORY)
 
-Every new session (or after `/reset`) MUST execute this sequence before any productive work:
+Every new session (or after `/reset`) MUST execute this sequence before productive work:
 
 ```markdown
 ## Memory Recall Protocol
-
-1. memory_smart_search(query: "user preferences", limit: 5)
-2. memory_smart_search(query: "project conventions", limit: 5)
-3. memory_smart_search(query: "architecture decisions", limit: 5)
-4. memory_smart_search(query: "lessons learned", limit: 10)
-5. memory_sessions(limit: 5) — to see what was done recently
-6. memory_recall(query: "current-state") — to check session log
-```
-
-If the project has been worked on before, also call:
-```javascript
-// Get file-level history for any files you're about to touch
-memory_file_history(files: ["src/middleware/auth.ts", "src/lib/api.ts"])
+1. list_projects — is the current repo indexed?
+2. get_architecture — module structure, entry points, hot spots.
+3. search_graph(query: "<project keywords>") — find the code areas from last session.
+4. manage_adr(mode: sections) — restore architecture decisions.
+5. git log --oneline -5 && git status — what the last session changed.
+6. Read .opencode/memory/ if present — preferences, lessons, last session log.
 ```
 
 ### Synthesise Findings
@@ -107,28 +76,26 @@ Before the session ends (user says "done", "bye", or after completing a signific
 
 ```markdown
 ## Memory Save Protocol
-
-1. Save session log (overwrite `session-log` + `current-state` concepts)
-2. Save any new user preferences discovered
-3. Save any new conventions observed
-4. Save any lessons/bugs encountered
-5. Save any architecture decisions made
-6. memory_consolidate() — run the 4-tier consolidation pipeline
+1. Write session log (.opencode/memory/session-<date>.md) — what was done, next steps
+2. Save new user preferences discovered (docs/knowledge.md)
+3. Save new conventions observed (manage_adr / docs/knowledge.md)
+4. Save lessons/bugs encountered (.opencode/memory/lessons.md)
+5. Save architecture decisions made (manage_adr mode: update)
 ```
 
-Use `memory_smart_search` first to check if you're about to duplicate something already saved.
+Use `search_graph` / read `docs/knowledge.md` first to check you're not duplicating something already saved.
 
 ## Auto-Save Triggers (Mid-Session)
 
 Save immediately (don't wait for session end) when these occur:
 
-| Trigger | Action | Example |
-|---------|--------|---------|
-| User states a preference | Save `type: preference` | "I prefer tabs over spaces" |
-| Decision with trade-offs | Save `type: architecture` | "We chose X because Y" |
-| Non-obvious bug found | Save `type: lesson` | "Remember to validate JWT expiry before payload" |
-| Custom convention discovered | Save `type: convention` | "All mutations go through service layer" |
-| User corrects your approach | Save `type: preference` + `type: convention` | "Don't use barrel exports" |
+| Trigger | Action |
+|---------|--------|
+| User states a preference | Append to `docs/knowledge.md` |
+| Decision with trade-offs | `manage_adr` (architecture) |
+| Non-obvious bug found | Append to `.opencode/memory/lessons.md` |
+| Custom convention discovered | `manage_adr` or `docs/knowledge.md` |
+| User corrects your approach | `manage_adr` + knowledge.md |
 
 The heuristic: **if the user would be annoyed repeating this next session, save it now.**
 
@@ -136,42 +103,33 @@ The heuristic: **if the user would be annoyed repeating this next session, save 
 
 Periodically (or when user says "organise memory" / "memory review"):
 
-```javascript
-// 1. Find duplicate or stale entries
-memory_patterns()
-
-// 2. Delete what's no longer relevant (requires user confirmation)
-memory_governance_delete(memory_id: "...")
-
-// 3. Re-consolidate
-memory_consolidate()
-```
+1. `index_status` — check graph health and coverage gaps.
+2. `search_graph` for repeating symbol lookups you keep doing manually — the graph should cover them.
+3. Read `docs/knowledge.md` and `.opencode/memory/` — prune stale notes (user confirmation for deletions).
+4. Regenerate ADR sections if the architecture moved on.
 
 ### Duplicate Prevention
 
-Before every `memory_save`, check with `memory_recall` or `memory_smart_search` whether the same information already exists. Overwrite if the old version is stale, skip if it's identical.
+Before every save, check whether the same information already exists (search graph / read memory files). Overwrite if stale, skip if identical.
 
 ## Edge Cases
 
-### No agentmemory server
-If agentmemory MCP is unavailable (tools don't appear in the tool list), fall back to:
-- Save a JSON file at `.opencode/memory/memory-<type>.json` using Write tool
-- Recall by reading `.opencode/memory/` directory
-- Report: "agentmemory server offline — using file-based fallback"
+### No codebase-memory-mcp server
+If the tools are absent, fall back to file-based memory (`.opencode/memory/` + `docs/knowledge.md`) and report: "codebase-memory-mcp offline — using file-based fallback".
 
 ### First session ever
-If `memory_sessions` returns empty, skip the full recall ritual and note: "Fresh project — no prior memory. Starting clean."
+If no prior context is found, skip the full recall ritual and note: "Fresh project — no prior memory. Starting clean."
 
 ### Conflict between memory and codebase
-Codebase is always the source of truth. If memory says one thing but the code shows another, trust the code and save a correction.
+Codebase is always the source of truth. If memory says one thing but the code shows another, trust the code, save a correction, and re-index if needed.
 
 ## Cross-Agent Memory Discipline
 
-When the IT Leader delegates to a subagent, the subagent does NOT have direct agentmemory access. Instead:
+When the IT Leader delegates to a subagent, the subagent does NOT have direct graph access in shared contexts. Instead:
 
-1. **IT Leader recalls** relevant memory before delegating
-2. **IT Leader includes** the synthesis in the delegation contract (see agent-delegation-contract skill)
-3. **Subagent reports** any new findings at the end
-4. **IT Leader saves** the subagent's findings to agentmemory
+1. **IT Leader recalls** relevant context before delegating (search_graph + ADR).
+2. **IT Leader includes** the synthesis in the delegation contract (see agent-delegation-contract skill).
+3. **Subagent reports** any new findings at the end.
+4. **IT Leader saves** the subagent's findings (manage_adr + memory files).
 
 This prevents memory pollution from subagents running in shared or unclear contexts.

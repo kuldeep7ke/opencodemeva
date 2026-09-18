@@ -221,7 +221,7 @@ _This agent ensures production-ready quality by reviewing code for correctness, 
 
 Load the following skills for domain-specific guidance:
 
-- `agentmemory`
+- `codebase-memory-mcp`
 - `api-design`
 - `code-review-workflow`
 - `coding-standards`

@@ -146,7 +146,7 @@ Load the following skills for domain-specific guidance:
 - `agent-harness-construction`
 - `agent-introspection-debugging`
 - `agentic-engineering`
-- `agentmemory`
+- `codebase-memory-mcp`
 - `autonomous-agent-harness`
 - `autonomous-loops`
 - `coding-standards`

@@ -113,5 +113,5 @@ git diff -- '*.java'
 
 ## Skills
 
-- `agentmemory`
+- `codebase-memory-mcp`
 - `coding-standards`

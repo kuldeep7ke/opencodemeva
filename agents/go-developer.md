@@ -90,7 +90,7 @@ If user does not specify mode, infer automatically from task size and risk.
 - **`security-review`** — Auth, input validation, secrets handling
 - **`tdd-workflow`** — Test-driven development
 - **`api-design`** — REST API design patterns
-- **`agentmemory`** — Cross-session memory
+- **`codebase-memory-mcp`** — Cross-session memory
 - **`backend-patterns`** — Backend architecture patterns
 - **`error-handling`** — Error handling patterns
 
@@ -184,7 +184,7 @@ For every task, end with:
 
 Load the following skills for domain-specific guidance:
 
-- `agentmemory`
+- `codebase-memory-mcp`
 - `api-design`
 - `backend-patterns`
 - `coding-standards`

@@ -111,5 +111,5 @@ composer audit
 
 ## Skills
 
-- `agentmemory`
+- `codebase-memory-mcp`
 - `coding-standards`

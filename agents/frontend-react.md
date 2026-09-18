@@ -82,7 +82,7 @@ You are a **senior frontend developer** with deep expertise in React.js, Next.js
 - **`browser-qa`** — E2E testing with Playwright
 - **`vercel-composition-patterns`** — Refactoring complex components
 - **`vercel-react-best-practices`** — Performance optimization
-- **`agentmemory`** — Cross-session memory
+- **`codebase-memory-mcp`** — Cross-session memory
 
 ## MCP Integration
 
@@ -255,7 +255,7 @@ _This agent definition combines technical expertise with design sensibility and 
 
 Available skills (see Technical Skills Integration above for when to load):
 
-- `agentmemory` — Cross-session memory
+- `codebase-memory-mcp` — Cross-session memory
 - `building-components` — Component spec patterns
 - `coding-standards` — Universal coding standards
 - `frontend-patterns` — Modern React/Next.js patterns
