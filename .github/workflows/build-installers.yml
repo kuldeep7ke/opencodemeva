@@ -22,7 +22,7 @@ jobs:
           Get-ChildItem -Force installer\dist | Select-Object Name, Length
 
       - name: Upload Windows artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: opencodemeva-patch-windows
           path: |
@@ -30,7 +30,7 @@ jobs:
             installer/dist/SHA256SUMS.txt
 
   linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
 
@@ -45,7 +45,7 @@ jobs:
           dpkg-deb --contents installer/dist/*.deb | head -40
 
       - name: Upload Linux artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: opencodemeva-patch-linux
           path: |
