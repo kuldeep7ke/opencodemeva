@@ -1,16 +1,37 @@
 {
   "name": "opencodemeva",
   "version": "1.0.0",
-  "description": "All-in-one opencode config pack: 54 agents, 83 commands, 295 skills, 9 plugins. Merged from 6 everything-opencode style open-source repos.",
+  "description": "Patch installer + curated option pack for opencode: agents, commands, skills, plugins, MCP, LSP. Free and open source.",
   "license": "MIT",
   "private": false,
   "type": "module",
+  "bin": {
+    "opencodemeva": "src/cli.js"
+  },
   "scripts": {
-    "validate": "node scripts/validate.mjs .",
-    "merge": "node scripts/merge.mjs",
+    "validate": "node scripts/validate.mjs options",
+    "test": "node scripts/test-cli.mjs",
     "build": "npm run validate && npm pack"
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "files": [
+    "src/",
+    "scripts/",
+    "options/",
+    "install.ps1",
+    "install.sh",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "opencode",
+    "agents",
+    "skills",
+    "plugins",
+    "mcp",
+    "lsp",
+    "cli"
+  ]
 }

@@ -1,7 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const M = process.argv[2] || "C:/Users/Admin/.config/opencode";
+const DEFAULT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "options");
+const M = process.argv[2] || DEFAULT;
 const fmRe = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
 
 function parseFm(t) {
