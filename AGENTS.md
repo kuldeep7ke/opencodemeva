@@ -1,6 +1,6 @@
-# Everything Claude Code (ECC) — Agent Instructions
+# Opencode Patch — Agent Instructions
 
-This is a **production-ready AI coding plugin** providing 68 specialized agents, 292 skills, 94 commands, and automated hook workflows for software development.
+This is a **production-ready opencode extension** providing 68 specialized agents, 292 skills, 94 commands, and automated hook workflows for software development.
 
 **Version:** 2.2.1
 
@@ -52,6 +52,7 @@ This is a **production-ready AI coding plugin** providing 68 specialized agents,
 ## Agent Orchestration
 
 Use agents proactively without user prompt:
+
 - Complex feature requests → **planner**
 - Code just written/modified → **code-reviewer**
 - Bug fix or new feature → **tdd-guide**
@@ -67,6 +68,7 @@ Use parallel execution for independent operations — launch multiple agents sim
 ## Security Guidelines
 
 **Before ANY commit:**
+
 - No hardcoded secrets (API keys, passwords, tokens)
 - All user inputs validated
 - SQL injection prevention (parameterized queries)
@@ -91,6 +93,7 @@ Use parallel execution for independent operations — launch multiple agents sim
 **Input validation:** Validate all user input at system boundaries. Use schema-based validation. Fail fast with clear messages. Never trust external data.
 
 **Code quality checklist:**
+
 - Functions small (<50 lines), files focused (<800 lines)
 - No deep nesting (>4 levels)
 - Proper error handling, no hardcoded values
@@ -101,11 +104,13 @@ Use parallel execution for independent operations — launch multiple agents sim
 **Minimum coverage: 80%**
 
 Test types (all required):
+
 1. **Unit tests** — Individual functions, utilities, components
 2. **Integration tests** — API endpoints, database operations
 3. **E2E tests** — Critical user flows
 
 **TDD workflow (mandatory):**
+
 1. Write test first (RED) — test should FAIL
 2. Write minimal implementation (GREEN) — test should PASS
 3. Refactor (IMPROVE) — verify coverage 80%+
@@ -123,12 +128,6 @@ Troubleshoot failures: check test isolation → verify mocks → fix implementat
    - If the current task already produces the relevant docs or code comments, do not duplicate the same information elsewhere
    - If there is no obvious project doc location, ask before creating a new top-level file
 5. **Commit** — Conventional commits format, comprehensive PR summaries
-
-## Workflow Surface Policy
-
-- `skills/` is the canonical workflow surface.
-- New workflow contributions should land in `skills/` first.
-- `commands/` is a legacy slash-entry compatibility surface and should only be added or updated when a shim is still required for migration or cross-harness parity.
 
 ## Git Workflow
 
@@ -152,18 +151,23 @@ Troubleshoot failures: check test isolation → verify mocks → fix implementat
 
 ## Project Structure
 
-```
-agents/          — 68 specialized subagents
-skills/          — 292 workflow skills and domain knowledge
-commands/        — 94 slash commands
-hooks/           — Trigger-based automations
-rules/           — Always-follow guidelines (common + per-language)
-scripts/         — Cross-platform Node.js utilities
-mcp-configs/     — 14 MCP server configurations
-tests/           — Test suite
-```
+agents/ — 68 specialized subagents
+skills/ — 292 workflow skills and domain knowledge
+commands/ — 94 slash commands
 
-`commands/` remains in the repo for compatibility, but the long-term direction is skills-first.
+```text
+opencodemeva/
+|-- agents/          — 68 specialized subagents for delegation
+|-- skills/          — 292 reusable workflows loaded on demand
+|-- commands/        — 94 maintained slash-command shims
+|-- rules/           — opt-in common and language standards
+|-- hooks/           — runtime automation and enforcement
+|-- scripts/         — cross-platform Node.js utilities
+|-- mcp-configs/     — 31 MCP server configurations
+|-- .opencode/       — opencode plugin, commands, and instructions
+|-- tests/           — Test suite
+|-- docs/            — public setup, architecture, and operating guides
+```
 
 ## Success Metrics
 

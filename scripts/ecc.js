@@ -9,15 +9,15 @@ const { createSafeItoInvocationEnvironment, getInvocationCommand } = require('./
 const COMMANDS = {
   setup: {
     script: 'setup.js',
-    description: 'Install or update the Claude plugin with guided scope and hook choices',
+    description: 'Install or update with guided scope and hook choices',
   },
   welcome: {
     script: 'welcome.js',
-    description: 'Show the ECC welcome artwork and community links',
+    description: 'Show the Opencode Patch welcome artwork and community links',
   },
   install: {
     script: 'install-apply.js',
-    description: 'Install ECC content, including the guided multi-harness wizard',
+    description: 'Install Opencode Patch content, including the guided setup wizard',
   },
   plan: {
     script: 'install-plan.js',
@@ -29,7 +29,7 @@ const COMMANDS = {
   },
   consult: {
     script: 'consult.js',
-    description: 'Recommend ECC components and profiles from a natural language query',
+    description: 'Recommend Opencode Patch components and profiles from a natural language query',
   },
   'control-pane': {
     script: 'control-pane.js',
@@ -45,7 +45,7 @@ const COMMANDS = {
   },
   memory: {
     script: 'memory.js',
-    description: 'Share durable context across Claude, Codex, Hermes, and other harnesses',
+    description: 'Share durable context across opencode sessions',
   },
   'install-plan': {
     script: 'install-plan.js',
@@ -57,7 +57,7 @@ const COMMANDS = {
   },
   doctor: {
     script: 'doctor.js',
-    description: 'Diagnose missing or drifted ECC-managed files',
+    description: 'Diagnose missing or drifted Opencode Patch-managed files',
   },
   feedback: {
     script: 'feedback.js',
@@ -65,15 +65,15 @@ const COMMANDS = {
   },
   repair: {
     script: 'repair.js',
-    description: 'Restore drifted or missing ECC-managed files',
+    description: 'Restore drifted or missing Opencode Patch-managed files',
   },
   'auto-update': {
     script: 'auto-update.js',
-    description: 'Pull latest ECC changes and reinstall the current managed targets',
+    description: 'Pull latest Opencode Patch changes and reinstall the current managed targets',
   },
   status: {
     script: 'status.js',
-    description: 'Query the ECC SQLite state store status summary',
+    description: 'Query the Opencode Patch SQLite state store status summary',
   },
   'platform-audit': {
     script: 'platform-audit.js',
@@ -85,7 +85,7 @@ const COMMANDS = {
   },
   sessions: {
     script: 'sessions-cli.js',
-    description: 'List or inspect ECC sessions from the SQLite state store',
+    description: 'List or inspect Opencode Patch sessions from the SQLite state store',
   },
   'work-items': {
     script: 'work-items.js',
@@ -93,15 +93,15 @@ const COMMANDS = {
   },
   'session-inspect': {
     script: 'session-inspect.js',
-    description: 'Emit canonical ECC session snapshots from dmux or Claude history targets',
+    description: 'Emit canonical Opencode Patch session snapshots',
   },
   'loop-status': {
     script: 'loop-status.js',
-    description: 'Inspect Claude transcripts for stale loop wakeups and pending tool results',
+    description: 'Inspect transcripts for stale loop wakeups and pending tool results',
   },
   uninstall: {
     script: 'uninstall.js',
-    description: 'Remove ECC-managed files recorded in install-state',
+    description: 'Remove Opencode Patch-managed files recorded in install-state',
   },
 };
 
@@ -133,7 +133,7 @@ const PRIMARY_COMMANDS = [
 
 function showHelp(exitCode = 0) {
   process.stdout.write(`
-ECC selective-install CLI
+Opencode Patch selective-install CLI
 
 Usage:
   ecc <command> [args...]

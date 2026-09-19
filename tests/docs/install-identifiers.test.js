@@ -22,12 +22,15 @@ function test(name, fn) {
 }
 
 const publicInstallDocs = [
-  'README.md',
-  'README.zh-CN.md',
   'docs/pt-BR/README.md',
   'docs/zh-CN/README.md',
   'docs/ja-JP/skills/configure-ecc/SKILL.md',
   'docs/zh-CN/skills/configure-ecc/SKILL.md',
+];
+
+const opencodeOnlyInstallDocs = [
+  'README.md',
+  'README.zh-CN.md',
 ];
 
 console.log('\n=== Testing public install identifiers ===\n');
@@ -44,15 +47,25 @@ for (const relativePath of publicInstallDocs) {
   });
 }
 
+for (const relativePath of opencodeOnlyInstallDocs) {
+  const content = fs.readFileSync(path.join(repoRoot, relativePath), 'utf8');
+
+  test(`${relativePath} does not use the overlong legacy marketplace plugin identifier`, () => {
+    assert.ok(!content.includes('everything-claude-code@everything-claude-code'));
+    assert.ok(!content.includes('ecc@ecc'));
+  });
+
+  test(`${relativePath} documents the opencode-patch package name`, () => {
+    assert.ok(content.includes('opencode-patch'));
+    assert.ok(content.includes('kuldeep7ke/opencodemeva'));
+  });
+}
+
 const pluginAndManualInstallDocs = [
-  'README.md',
-  'README.zh-CN.md',
   'docs/zh-CN/README.md',
 ];
 
 const publicCommandNamespaceDocs = [
-  'README.md',
-  'README.zh-CN.md',
   'docs/pt-BR/README.md',
   'docs/tr/README.md',
   'docs/ko-KR/README.md',
@@ -62,7 +75,6 @@ const publicCommandNamespaceDocs = [
 ];
 
 const manualClaudeSkillInstallDocs = [
-  'README.md',
   'docs/de-DE/README.md',
   'docs/ru/README.md',
 ];
@@ -208,6 +220,21 @@ for (const relativePath of pluginAndManualInstallDocs) {
   });
 }
 
+for (const relativePath of opencodeOnlyInstallDocs) {
+  const content = fs.readFileSync(path.join(repoRoot, relativePath), 'utf8');
+
+  test(`${relativePath} documents dry-run before install and uninstall`, () => {
+    assert.ok(
+      content.includes('--dry-run'),
+      'Expected opencode-only docs to document dry-run previews'
+    );
+    assert.ok(
+      content.includes('npx opencode-patch uninstall'),
+      'Expected opencode-only docs to document the uninstall command'
+    );
+  });
+}
+
 for (const relativePath of publicCommandNamespaceDocs) {
   const content = fs.readFileSync(path.join(repoRoot, relativePath), 'utf8');
 
@@ -223,6 +250,29 @@ for (const relativePath of publicCommandNamespaceDocs) {
   });
 }
 
+for (const relativePath of opencodeOnlyInstallDocs) {
+  const content = fs.readFileSync(path.join(repoRoot, relativePath), 'utf8');
+
+  test(`${relativePath} shows opencode slash commands without legacy namespaces`, () => {
+    assert.ok(
+      !content.includes('/everything-claude-code:'),
+      'Expected docs not to advertise the overlong legacy plugin command namespace'
+    );
+    assert.ok(
+      !content.includes('/ecc:'),
+      'Expected opencode-only docs not to use the legacy plugin command namespace'
+    );
+    assert.ok(
+      content.includes('/plan'),
+      'Expected docs to show the /plan slash command'
+    );
+    assert.ok(
+      content.includes('/code-review'),
+      'Expected docs to show the /code-review slash command'
+    );
+  });
+}
+
 for (const relativePath of manualClaudeSkillInstallDocs) {
   const content = fs.readFileSync(path.join(repoRoot, relativePath), 'utf8');
 
@@ -234,6 +284,21 @@ for (const relativePath of manualClaudeSkillInstallDocs) {
     assert.ok(
       content.includes('~/.claude/skills/'),
       'Expected manual install docs to copy skills into direct ~/.claude/skills children'
+    );
+  });
+}
+
+for (const relativePath of opencodeOnlyInstallDocs) {
+  const content = fs.readFileSync(path.join(repoRoot, relativePath), 'utf8');
+
+  test(`${relativePath} keeps rules inside opencode config paths`, () => {
+    assert.ok(
+      content.includes('.opencode/rules/') || content.includes('~/.config/opencode'),
+      'Expected opencode-only docs to scope rules to opencode config paths'
+    );
+    assert.ok(
+      !content.includes('~/.claude/rules/'),
+      'Expected opencode-only docs not to reference Claude rules paths'
     );
   });
 }

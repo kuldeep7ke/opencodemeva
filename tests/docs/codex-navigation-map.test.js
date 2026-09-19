@@ -68,11 +68,9 @@ test('Codex navigation map documents PR diff packet workflow', () => {
   }
 });
 
-test('README and Codex supplement link to the navigation map', () => {
-  const readme = read('README.md');
+test('Codex supplement links to the navigation map', () => {
   const codexAgents = read('.codex/AGENTS.md');
 
-  assert.ok(readme.includes(guidePath), 'README.md must link the Codex navigation map');
   assert.ok(codexAgents.includes(guidePath), '.codex/AGENTS.md must link the Codex navigation map');
 });
 

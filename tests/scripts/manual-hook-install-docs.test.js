@@ -38,24 +38,12 @@ function runTests() {
 
   if (test('README warns against raw hook file copying', () => {
     assert.ok(
-      readme.includes('Do not copy the raw repo `hooks/hooks.json` into `~/.claude/settings.json` or `~/.claude/hooks/hooks.json`'),
+      readme.includes('Do not copy the raw repo `hooks/hooks.json` into your opencode config'),
       'README should warn against unsupported raw hook copying'
     );
     assert.ok(
-      readme.includes('bash ./install.sh --target claude --modules hooks-runtime --enable-hooks'),
-      'README should document the supported Bash hook install path'
-    );
-    assert.ok(
-      readme.includes('pwsh -File .\\install.ps1 --target claude --modules hooks-runtime --enable-hooks'),
-      'README should document the supported PowerShell hook install path'
-    );
-    assert.ok(
-      readme.includes('%USERPROFILE%\\.claude'),
-      'README should call out the correct Windows Claude config root'
-    );
-    assert.ok(
-      normalizeWhitespace(readme).includes(HOOK_REGISTRATION_PHRASE),
-      'README should explain that manual installs register hooks in Claude settings'
+      readme.includes('npx opencode-patch install'),
+      'README should document the supported opencode hook install path'
     );
   })) passed++; else failed++;
 

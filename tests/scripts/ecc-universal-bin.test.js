@@ -338,7 +338,7 @@ test('packed ecc-universal launches the guided multi-harness help', () => {
 
 test('packed ecc alias launches the primary dispatcher', () => {
   const result = launchPackedBinary('ecc', ['--help']);
-  assert.match(result.stdout, /ECC selective-install CLI/);
+  assert.match(result.stdout, /Opencode Patch selective-install CLI/);
   assert.match(result.stdout, /ecc install --guided/);
 });
 

@@ -64,7 +64,7 @@ function main() {
     ['shows top-level help', () => {
       const result = runCli(['--help']);
       assert.strictEqual(result.status, 0);
-      assert.match(result.stdout, /ECC selective-install CLI/);
+      assert.match(result.stdout, /Opencode Patch selective-install CLI/);
       assert.match(result.stdout, /catalog/);
       assert.match(result.stdout, /list-installed/);
       assert.match(result.stdout, /doctor/);

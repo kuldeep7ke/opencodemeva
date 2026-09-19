@@ -64,10 +64,10 @@ test('release candidate directory includes the public launch pack', () => {
   }
 });
 
-test('README links to Hermes setup and current release notes', () => {
+test('README links to the changelog release history', () => {
   const readme = read('README.md');
-  assert.ok(readme.includes('docs/HERMES-SETUP.md'), 'README must link to Hermes setup');
-  assert.ok(readme.includes('docs/releases/2.0.0/release-notes.md'), 'README must link to the 2.0.0 release notes');
+  assert.ok(readme.includes('CHANGELOG.md'), 'README must link to the changelog');
+  assert.ok(readme.includes('kuldeep7ke/opencodemeva/releases'), 'README must link to the releases page');
 });
 
 test('cross-harness architecture doc exists and names core harnesses', () => {

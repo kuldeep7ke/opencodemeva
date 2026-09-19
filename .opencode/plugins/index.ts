@@ -1,12 +1,11 @@
 /**
- * ECC Plugins for OpenCode
+ * Opencode Patch Plugins for opencode
  *
- * This module exports all ECC plugins for OpenCode integration.
- * Plugins provide hook-based automation that mirrors Claude Code's hook system
- * while taking advantage of OpenCode's more sophisticated 20+ event types.
+ * This module exports all Opencode Patch plugins for opencode integration.
+ * Plugins provide hook-based automation taking advantage of opencode's 20+ event types.
  */
 
-export { ECCHooksPlugin, default } from "./ecc-hooks.js"
+export { OpencodePatchPlugin, default } from "./opencode-patch-hooks.js"
 
 // Re-export for named imports
-export * from "./ecc-hooks.js"
+export * from "./opencode-patch-hooks.js"

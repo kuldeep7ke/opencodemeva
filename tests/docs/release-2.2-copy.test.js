@@ -28,8 +28,8 @@ for (const pattern of staleReleaseCopy) {
   assert.doesNotMatch(readme, pattern);
 }
 
-assert.match(readme, /ECC 2\.2 includes guided package setup/i);
-assert.match(readme, /npm view ecc-universal version/);
+assert.match(readme, /Current release:.*2\.2\.1/i);
+assert.match(readme, /npx opencode-patch install/);
 
 for (const source of [changelog, releaseNotes, nasikoSkill, modules, components]) {
   assert.doesNotMatch(source, /Nasiko integration/i);
@@ -37,4 +37,4 @@ for (const source of [changelog, releaseNotes, nasikoSkill, modules, components]
   assert.match(source, /Nasiko CLI lifecycle bridge/i);
 }
 
-console.log('ECC 2.2 release copy: ok');
+console.log('Opencode Patch 2.2 release copy: ok');

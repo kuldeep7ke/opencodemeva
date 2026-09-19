@@ -1,9 +1,9 @@
 # Builds app icon assets for the installer from the repo logo.
 #   - appicon.ico   (16, 24, 32, 48, 64, 128, 256 — BMP frames + PNG 256)
 #   - appicon-256.png / appicon-512.png
-#   - appicon.svg   (passthrough copy of assets/ecc-icon.svg)
+#   - appicon.svg   (passthrough copy of assets/opencode-icon.svg)
 param(
-  [string]$InputPng = "installer/../assets/images/ecc-logo.png",
+  [string]$InputPng = "installer/../assets/opencode-logo-512.png",
   [string]$OutDir = "installer/assets"
 )
 
@@ -116,8 +116,8 @@ foreach ($s in @(256, 512)) {
 
 $source.Dispose()
 
-if (Test-Path "assets/ecc-icon.svg") {
-  Copy-Item "assets/ecc-icon.svg" (Join-Path $OutDir "appicon.svg") -Force
+if (Test-Path "assets/opencode-icon.svg") {
+  Copy-Item "assets/opencode-icon.svg" (Join-Path $OutDir "appicon.svg") -Force
 }
 
 $ico = Get-Item (Join-Path $OutDir "appicon.ico")

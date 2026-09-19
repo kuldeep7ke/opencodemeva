@@ -1,6 +1,6 @@
-# Everything Claude Code - WorldFlowAI Setup Guide
+# Opencode Patch - WorldFlowAI Setup Guide
 
-Quick reference for using the everything-claude-code toolkit with synapse and arbiter projects.
+Quick reference for using the opencodemeva toolkit with synapse and arbiter projects.
 
 ## Installed Components
 

@@ -1,9 +1,8 @@
 # OpenCode Meva Patch Installers
 
-Drop-in "patches" that install the OpenCode Meva pack — `agents`, `skills`,
-`commands`, `rules`, `hooks`, `mcp-configs`, `workflows`, `plugins` (Everything
-Claude Code layout) — into the user's opencode config directory
-(`~/.config/opencode`).
+Drop-in "patches" that install the Opencode Patch pack — `agents`, `skills`,
+`commands`, `rules`, `hooks`, `mcp-configs`, `workflows`, `plugins` — into the
+user's opencode config directory (`~/.config/opencode`).
 
 The patch is reversible: a marker file (`.opencodemeva.json`) records a SHA-256
 per installed file, and unapplying removes only files that were not modified

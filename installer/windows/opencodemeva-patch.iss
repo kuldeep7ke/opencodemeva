@@ -8,7 +8,7 @@
 
 #define AppName "OpenCode Meva Patch"
 #define AppPublisher "Meva family"
-#define AppURL "https://kuldeep7ke.github.io/opencodemeva/"
+#define AppURL "https://github.com/kuldeep7ke/opencodemeva"
 #define AppExeName "apply-patch.ps1"
 #define AppId "{{9A7B9361-8EFD-4606-A6A9-CC72F0C13BCC}"
 

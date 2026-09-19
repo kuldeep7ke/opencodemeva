@@ -10,12 +10,14 @@ const SKILL_PATHS = [
   '.agents/skills/unified-memory/SKILL.md',
   '.cursor/skills/unified-memory/SKILL.md',
 ];
-const RUNTIME_DOC_PATHS = [
+const LEGACY_RUNTIME_DOC_PATHS = [
   ...SKILL_PATHS,
-  'README.md',
   'docs/HERMES-SETUP.md',
-  'README.zh-CN.md',
   'docs/zh-CN/README.md',
+];
+const OPENCODE_RUNTIME_DOC_PATHS = [
+  'README.md',
+  'README.zh-CN.md',
 ];
 
 let passed = 0;
@@ -43,8 +45,8 @@ function stripFrontmatter(source) {
 
 console.log('\n=== Testing unified-memory install and adapter surfaces ===\n');
 
-test('documents the separately installed ECC runtime on every exposed surface', () => {
-  for (const relativePath of RUNTIME_DOC_PATHS) {
+test('documents the separately installed runtime on every exposed surface', () => {
+  for (const relativePath of LEGACY_RUNTIME_DOC_PATHS) {
     const source = read(relativePath);
     assert.match(
       source,
@@ -54,6 +56,20 @@ test('documents the separately installed ECC runtime on every exposed surface', 
     assert.match(
       source,
       /ecc-memory-mcp/,
+      `${relativePath} must identify the optional MCP binary`
+    );
+  }
+
+  for (const relativePath of OPENCODE_RUNTIME_DOC_PATHS) {
+    const source = read(relativePath);
+    assert.match(
+      source,
+      /npm install -g opencode-patch/i,
+      `${relativePath} must state how to install the required CLI runtime`
+    );
+    assert.match(
+      source,
+      /opencode-patch-memory-mcp/,
       `${relativePath} must identify the optional MCP binary`
     );
   }

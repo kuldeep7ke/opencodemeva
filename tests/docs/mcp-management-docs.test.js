@@ -48,24 +48,20 @@ test('token optimization guide separates Claude MCP disables from ECC config fil
   );
 });
 
-test('README MCP guidance avoids settings.json disable instructions', () => {
+test('README MCP guidance stays opencode-only', () => {
   const source = read('README.md');
 
   assert.ok(
-    source.includes('Use `/mcp` for Claude Code runtime disables; Claude Code persists those choices in `~/.claude.json`.'),
-    'README should route runtime MCP disables through /mcp and ~/.claude.json'
+    source.includes('mcp-configs/'),
+    'README should point to the MCP presets directory'
   );
   assert.ok(
-    source.includes('`ECC_DISABLED_MCPS` is an ECC install/sync filter, not a live Claude Code toggle.'),
-    'README should explain ECC_DISABLED_MCPS scope'
+    !source.includes('disabledMcpServers'),
+    'README should not repeat stale project-config disable guidance'
   );
   assert.ok(
-    !source.includes('// In your project\'s .claude/settings.json\n{\n  "disabledMcpServers"'),
-    'README should not show disabledMcpServers under .claude/settings.json'
-  );
-  assert.ok(
-    !source.includes('Use `disabledMcpServers` in project config to disable unused ones'),
-    'README quick reference should not repeat stale project-config guidance'
+    !source.includes('~/.claude'),
+    'README should not reference Claude config paths for MCP setup'
   );
 });
 

@@ -15,9 +15,7 @@ Security fixes land on `main` first. Backports are best-effort and only for curr
 
 Use GitHub private vulnerability reporting whenever possible — it reaches the maintainer directly:
 
-- <https://github.com/affaan-m/ECC/security/advisories/new>
-
-You can also email **<affaan@ecc.tools>** (the `security@ecc.tools` alias is not monitored — use `affaan@ecc.tools`).
+- <https://github.com/kuldeep7ke/opencodemeva/security/advisories/new>
 
 Do **not** open a public GitHub issue for security vulnerabilities.
 
@@ -42,57 +40,53 @@ If a report is declined, we will explain whether it is not reproducible, out of 
 
 This policy covers:
 
-- the `affaan-m/ECC` repository
-- the `ecc-universal` npm package
-- ECC plugin, install, repair, dashboard, hook, rule, skill, MCP, and command surfaces shipped from this repository
+- the `kuldeep7ke/opencodemeva` repository
+- the `opencode-patch` npm package
+- Opencode Patch plugin, install, repair, dashboard, hook, rule, skill, MCP, and command surfaces shipped from this repository
 - GitHub Actions workflows and release automation in this repository
-- the ECC Tools GitHub App integration points documented by this repository
-- AgentShield usage docs when they are embedded here. AgentShield code issues belong in <https://github.com/affaan-m/agentshield>
 
 ## Official Distribution Surfaces
 
-Official ECC surfaces are:
+Official Opencode Patch surfaces are:
 
-- GitHub repo: <https://github.com/affaan-m/ECC>
-- npm package: `ecc-universal`
-- GitHub App: <https://github.com/apps/ecc-tools>
-- marketplace/plugin slug: `ecc@ecc`
-- website: <https://ecc.tools>
+- GitHub repo: <https://github.com/kuldeep7ke/opencodemeva>
+- npm package: `opencode-patch`
+- Releases: <https://github.com/kuldeep7ke/opencodemeva/releases>
 
 Official AgentShield surface:
 
 - npm package: `ecc-agentshield`
 - GitHub repo: <https://github.com/affaan-m/agentshield>
 
-The following packages have been observed using ECC repository metadata but are **not maintained by ECC**:
+The following packages have been observed using this repository's metadata but are **not maintained by Opencode Patch**:
 
 - `@chil_ntl/ecc-cli`
 - `ecc-100xprompt-plugin`
 
-Treat any package not listed under official surfaces as unofficial until verified. Do not install packages named `opencode-ecc`, `everything-claude-code`, or other ECC-like aliases unless this repository explicitly documents them as official.
+Treat any package not listed under official surfaces as unofficial until verified. Do not install similarly-named packages or lookalike aliases unless this repository explicitly documents them as official.
 
-GitHub dependency graph may also show Go module aliases such as `github.com/affaan-m/ecc` or historical repository paths. ECC is not currently distributed as a supported Go module.
+GitHub dependency graph may also show Go module aliases such as `github.com/kuldeep7ke/opencodemeva` or historical repository paths. Opencode Patch is not currently distributed as a supported Go module.
 
 ## Out of Scope
 
 Reports are usually out of scope when they only show:
 
 - local command execution where the user already controls the local shell and no higher-privilege trust boundary is crossed
-- screenshots, stale line numbers, or reports against `affaan-m/everything-claude-code` that do not reproduce on current `affaan-m/ECC`
+- screenshots, stale line numbers, or reports that do not reproduce on the current `main` of `kuldeep7ke/opencodemeva`
 - self-XSS or social engineering with no repository-controlled exploit path
-- dependency graph/package metadata confusion without an install path to an official ECC package
-- vulnerabilities in third-party packages unless ECC pins, installs, or executes them in a way that creates extra impact
+- dependency graph/package metadata confusion without an install path to an official Opencode Patch package
+- vulnerabilities in third-party packages unless Opencode Patch pins, installs, or executes them in a way that creates extra impact
 
 Local developer tools can still be valid security issues when untrusted repository content, package installation, generated hooks, or CI automation can trigger execution without clear user intent. Show that trust boundary in the report.
 
 ## Supply-Chain Rules
 
-ECC treats supply-chain exposure as a first-class security surface.
+Opencode Patch treats supply-chain exposure as a first-class security surface.
 
 - GitHub Actions must use pinned commit SHAs for third-party actions.
 - Workflows must avoid shelling untrusted GitHub context directly into `run:` blocks.
 - Release and install docs must point only to official packages.
-- Package metadata should point at `affaan-m/ECC`, not historical repo paths.
+- Package metadata should point at `kuldeep7ke/opencodemeva`, not historical repo paths.
 - Private vulnerability reports are triaged privately before public disclosure.
 - Security advisories are published only when a supported release is affected and coordinated disclosure is appropriate.
 
@@ -102,16 +96,16 @@ ECC treats supply-chain exposure as a first-class security surface.
 
 `mcp-configs/mcp-servers.json` is a **template**. All `YOUR_*_HERE` values must be replaced at install time from env-vars or a secrets manager. Never commit real credentials. If a secret is accidentally committed, rotate it immediately and rewrite history. Do not rely on a plain revert.
 
-The same rule applies to user-scope Claude Code config (`~/.claude/settings.json` or `%USERPROFILE%\.claude\settings.json`). That file is outside this repository, but it is commonly shared through `claude doctor` output, screenshots, and bug reports. Do not hardcode PATs, API keys, or OAuth tokens into `mcpServers[*].env` blocks. Resolve them at spawn time from the OS keychain or env-vars your MCP server already supports.
+The same rule applies to your opencode config (`~/.config/opencode/opencode.json`). That file lives outside this repository, but it is commonly shared through screenshots and bug reports. Do not hardcode PATs, API keys, or OAuth tokens into `mcpServers[*].env` blocks. Resolve them at spawn time from the OS keychain or env-vars your MCP server already supports.
 
 Quick audit:
 
 ```bash
 # macOS / Linux
-grep -EnH '(TOKEN|SECRET|KEY|PASSWORD)\s*"\s*:\s*"[A-Za-z0-9_-]{16,}"' ~/.claude/settings.json
+grep -EnH '(TOKEN|SECRET|KEY|PASSWORD)\s*"\s*:\s*"[A-Za-z0-9_-]{16,}"' ~/.config/opencode/opencode.json
 
 # Windows PowerShell
-Select-String -Path "$env:USERPROFILE\.claude\settings.json" -Pattern '(TOKEN|SECRET|KEY|PASSWORD)"\s*:\s*"[A-Za-z0-9_-]{16,}"'
+Select-String -Path "$env:USERPROFILE\.config\opencode\opencode.json" -Pattern '(TOKEN|SECRET|KEY|PASSWORD)"\s*:\s*"[A-Za-z0-9_-]{16,}"'
 ```
 
 If the audit matches, rotate the secret at the issuing provider, then move it out of the file.
@@ -132,7 +126,7 @@ Compare the PID against the expected binary. Any other process on that port can 
 
 ## Triage: suspicious `<system-reminder>` blocks
 
-ECC runs inside agent harnesses that may inject ephemeral client-side system reminders into the model input on every turn. These blocks are not automatically repository-carried payloads.
+Opencode Patch runs inside opencode, which may inject ephemeral client-side system reminders into the model input on every turn. These blocks are not automatically repository-carried payloads.
 
 Before treating one as an attack, verify:
 

@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Opencode ECC — Patch for opencode</title>
+    <title>Opencode Patch — Offline patch for opencode CLI</title>
     <meta name="description" content="One-click offline patch that adds 68 agents, 292 skills, 94 commands, rules, hooks and MCP presets to your opencode CLI. Windows and Ubuntu/Debian installers." />
-    <link rel="icon" type="image/svg+xml" href="assets/ecc-icon.svg" />
+    <link rel="icon" type="image/svg+xml" href="assets/opencode-icon.svg" />
     <script>
       (function () {
         try {
@@ -22,7 +22,7 @@
   <body>
     <main class="landing-page">
       <nav class="landing-nav">
-        <a href="#" class="brand"><img src="assets/ecc-icon.svg" alt="Opencode ECC" class="brand-logo" width="38" height="38" /><span>Opencode ECC</span></a>
+        <a href="#" class="brand"><img src="assets/opencode-icon.svg" alt="Opencode Patch" class="brand-logo" width="38" height="38" /><span>Opencode Patch</span></a>
         <div class="nav-actions">
           <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
             <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
@@ -39,7 +39,7 @@
         <div class="hero-copy">
           <p class="hero-eyebrow">Patch for opencode · v2.2.1</p>
           <h1>Install once. opencode gains a <span class="highlight">whole team.</span></h1>
-          <p class="hero-text">Opencode ECC is an offline patch for your opencode CLI. Run one installer and your terminal gains 68 specialized agents, 292 skills, 94 commands, 122 rules, guardrail hooks and MCP presets — everything stays on your machine.</p>
+          <p class="hero-text">Opencode Patch is an offline patch for your opencode CLI. Run one installer and your terminal gains 68 specialized agents, 292 skills, 94 commands, 122 rules, guardrail hooks and MCP presets — everything stays on your machine.</p>
           <div class="hero-actions">
             <a class="btn btn-primary btn-lg" href="#download">Get the patch</a>
             <a class="btn btn-ghost btn-lg" href="#how">How it works</a>
@@ -52,8 +52,8 @@
             <div><strong>4571</strong><span>tests passing</span></div>
           </div>
         </div>
-        <div class="hero-card" aria-label="Opencode ECC preview">
-          <div class="preview-header"><span>opencode</span><strong>+ ECC patch</strong></div>
+        <div class="hero-card" aria-label="Opencode Patch preview">
+          <div class="preview-header"><span>opencode</span><strong>+ Patch</strong></div>
           <div class="preview-row ok"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><strong>68 agents</strong><small>planner · architect · reviewers · security</small></div></div>
           <div class="preview-row ok"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><strong>292 skills</strong><small>TDD · RAG · design · go · rust · python …</small></div></div>
           <div class="preview-row ok"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><strong>94 commands</strong><small>slash commands for every workflow</small></div></div>
@@ -81,7 +81,7 @@
         <article class="info-card">
           <div class="info-icon" style="background:#e0e7ff"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/><circle cx="12" cy="12" r="3"/></svg></div>
           <h3>Guardrails &amp; MCP presets</h3>
-          <p>24 safety hooks, 31 ready-made MCP server configs, and 10 harness targets — verified with 4571 passing tests.</p>
+          <p>24 safety hooks, 31 ready-made MCP server configs — verified with 4571 passing tests.</p>
         </article>
       </section>
 
@@ -124,8 +124,8 @@
             </div>
             <ul>
               <li><code>git clone https://github.com/kuldeep7ke/opencodemeva</code></li>
-              <li><code>npm install</code> then run <code>ecc --dry-run install</code> to preview</li>
-              <li>Apply with <code>ecc install</code></li>
+              <li><code>npm install</code> then run <code>opencode-patch --dry-run install</code> to preview</li>
+              <li>Apply with <code>opencode-patch install</code></li>
             </ul>
             <a class="btn btn-ghost" href="https://github.com/kuldeep7ke/opencodemeva" target="_blank" rel="noopener">Source on GitHub</a>
           </article>
@@ -143,11 +143,11 @@
 
       <footer class="landing-footer">
         <div class="footer-inner">
-          <a href="#" class="brand"><img src="assets/ecc-icon.svg" alt="Opencode ECC" class="brand-logo" width="34" height="34" /><span>Opencode ECC</span></a>
+          <a href="#" class="brand"><img src="assets/opencode-icon.svg" alt="Opencode Patch" class="brand-logo" width="34" height="34" /><span>Opencode Patch</span></a>
           <p class="footer-credit">Font by Inter · Part of the Meva family · Everything stays on your machine</p>
           <div class="footer-links">
             <a class="footer-link" href="https://github.com/kuldeep7ke/opencodemeva" target="_blank" rel="noopener">GitHub</a>
-            <a class="footer-link" href="https://ecc.tools" target="_blank" rel="noopener">ecc.tools</a>
+            <a class="footer-link" href="https://github.com/kuldeep7ke/opencodemeva/releases" target="_blank" rel="noopener">Releases</a>
           </div>
         </div>
       </footer>

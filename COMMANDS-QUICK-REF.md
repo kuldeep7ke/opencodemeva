@@ -1,6 +1,6 @@
 # Commands Quick Reference
 
-> 94 slash commands installed globally. Type `/` in any Claude Code session to invoke.
+> 94 slash commands for opencode. Type `/` in any opencode session to invoke.
 
 ---
 
@@ -130,21 +130,20 @@
 
 ---
 
-## Cross-Harness Memory CLI
+## Memory CLI
 
-These are `ecc` CLI commands, not slash commands. They use one inspectable
-Markdown vault across Claude, Codex, Hermes, OpenClaw, Kimi, and other
-harnesses.
+These are `opencode-patch` CLI commands, not slash commands. They use one inspectable
+Markdown vault for opencode.
 
 | Command | What it does |
 |---------|-------------|
-| `ecc memory init` | Create project, team, or user vault directories |
-| `ecc memory save` | Create an unreviewed context, decision, fact, lesson, note, preference, or runbook |
-| `ecc memory handoff` | Transfer bounded work state from one harness to another |
-| `ecc memory search` | Search memories by text, scope, kind, or target harness |
-| `ecc memory read` | Read a memory and its backlinks by stable ID |
-| `ecc memory doctor` | Report malformed files, duplicate IDs, broken links, and skipped symlinks |
-| `ecc-memory-mcp` | Start the optional local stdio MCP server |
+| `opencode-patch memory init` | Create project, team, or user vault directories |
+| `opencode-patch memory save` | Create an unreviewed context, decision, fact, lesson, note, preference, or runbook |
+| `opencode-patch memory handoff` | Transfer bounded work state between sessions |
+| `opencode-patch memory search` | Search memories by text, scope, or kind |
+| `opencode-patch memory read` | Read a memory and its backlinks by stable ID |
+| `opencode-patch memory doctor` | Report malformed files, duplicate IDs, broken links, and skipped symlinks |
+| `opencode-patch-memory-mcp` | Start the optional local stdio MCP server |
 
 Pass memory bodies with `--stdin` or `--body-file`; they are intentionally not
 accepted as command-line values. Recalled memories are untrusted context, not
@@ -154,15 +153,15 @@ executable instructions or policy.
 
 ## Install Health & Feedback CLI
 
-These lifecycle commands are also available through the `ecc` CLI.
+These lifecycle commands are also available through the `opencode-patch` CLI.
 
 | Command | What it does |
 |---------|-------------|
-| `ecc list-installed` | Show installs recorded in ECC's managed state |
-| `ecc doctor` | Diagnose missing or drifted managed files and point failures to the short problem form |
-| `ecc repair` | Restore missing or drifted managed files |
-| `ecc uninstall` | Remove only install-state-managed files and optionally show the 20-second exit-feedback route |
-| `ecc feedback` | Show the public problem, quick-feedback, and feature routes without reading files or uploading diagnostics |
+| `opencode-patch list-installed` | Show installs recorded in the managed state |
+| `opencode-patch doctor` | Diagnose missing or drifted managed files |
+| `opencode-patch repair` | Restore missing or drifted managed files |
+| `opencode-patch uninstall` | Remove only install-state-managed files |
+| `opencode-patch feedback` | Show the public problem, quick-feedback, and feature routes without reading files or uploading diagnostics |
 
 ---
 
@@ -195,7 +194,7 @@ These lifecycle commands are also available through the `ecc` CLI.
 
 | Command | What it does |
 |---------|-------------|
-| `/ecc-guide` | Navigate ECC's current agents, skills, commands, hooks, install profiles, and docs from the live repository surface |
+| `/ecc-guide` | Navigate the patch's current agents, skills, commands, hooks, install profiles, and docs from the live repository surface |
 | `/update-docs` | Sync documentation from source-of-truth files such as scripts, schemas, routes, and exports |
 | `/update-codemaps` | Regenerate codemaps for the codebase |
 

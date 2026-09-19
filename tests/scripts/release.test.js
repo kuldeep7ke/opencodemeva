@@ -99,9 +99,19 @@ function runTests() {
     );
   })) passed++; else failed++;
 
-  if (test('a 2.2 bump preserves historical root README release headings', () => {
-    const historicalHeading = rootReadmeSource.match(/^### v2\.0\.0:.*$/m);
-    assert.ok(historicalHeading, 'README fixture should contain the historical v2.0.0 heading');
+  if (test('root README links release history instead of carrying version headings', () => {
+    assert.ok(
+      rootReadmeSource.includes('CHANGELOG.md'),
+      'README should link the changelog for release history'
+    );
+    assert.ok(
+      rootReadmeSource.includes('kuldeep7ke/opencodemeva/releases'),
+      'README should link the releases page for release history'
+    );
+    assert.ok(
+      !/^### v2\.0\.0:.*$/m.test(rootReadmeSource),
+      'README should not carry historical per-version headings'
+    );
     assert.ok(
       source.includes('const oldVersion = process.argv[3]'),
       'release heading sync should receive the version being replaced'
@@ -113,18 +123,6 @@ function runTests() {
     assert.ok(
       !source.includes('/^### v[0-9]+\\.[0-9]+\\.[0-9]+'),
       'release heading sync must not relabel the first version-shaped heading as the new release'
-    );
-
-    const oldVersion = '2.1.0';
-    const nextVersion = '2.2.0';
-    const escapedOldVersion = oldVersion.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const simulated = rootReadmeSource.replace(
-      new RegExp(`^### v${escapedOldVersion}( .*)$`, 'm'),
-      `### v${nextVersion}$1`
-    );
-    assert.ok(
-      simulated.includes(historicalHeading[0]),
-      'syncing the current release must leave the historical v2.0.0 heading unchanged'
     );
   })) passed++; else failed++;
 

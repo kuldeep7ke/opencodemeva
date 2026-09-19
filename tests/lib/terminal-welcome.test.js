@@ -9,10 +9,9 @@ const {
 } = require('../../scripts/lib/terminal-welcome');
 
 const OFFICIAL_LINKS = Object.freeze({
-  github: 'https://github.com/affaan-m/ECC',
-  discord: 'https://discord.gg/36yGMHGFbR',
-  documentation: 'https://github.com/affaan-m/ECC#readme',
-  githubApp: 'https://github.com/apps/ecc-tools',
+  github: 'https://github.com/kuldeep7ke/opencodemeva',
+  documentation: 'https://github.com/kuldeep7ke/opencodemeva#readme',
+  releases: 'https://github.com/kuldeep7ke/opencodemeva/releases',
 });
 
 let passed = 0;
@@ -43,7 +42,7 @@ function createOutput(isTTY = true) {
 
 console.log('\n=== Terminal welcome tests ===\n');
 
-test('renders the cfonts block ECC wordmark with a welcome, version, and boxed links', () => {
+test('renders the cfonts block wordmark with a welcome, version, and boxed links', () => {
   const welcome = renderTerminalWelcome({ color: false });
   const lines = welcome.split('\n');
   const boxTop = lines.findIndex(line => line.startsWith('  ╭'));
@@ -53,16 +52,15 @@ test('renders the cfonts block ECC wordmark with a welcome, version, and boxed l
   assert.match(welcome, /╚══════╝\s+╚═════╝\s+╚═════╝/);
   assert.strictEqual(welcome.includes('◕'), false);
   assert.strictEqual(welcome.includes('ᴗ'), false);
-  assert.match(welcome, /Welcome to ECC!/);
+  assert.match(welcome, /Welcome to Opencode Patch!/);
   assert.ok(welcome.includes(`v${ECC_VERSION}`));
   assert.ok(boxTop > 0);
   assert.ok(boxBottom > boxTop);
   assert.ok(lines.slice(boxTop + 1, boxBottom).every(line => /^ {2}│ .* │$/.test(line)));
   assert.strictEqual(lines[boxTop].length, lines[boxBottom].length);
   assert.ok(welcome.includes(`GitHub:        ${OFFICIAL_LINKS.github}`));
-  assert.ok(welcome.includes(`Discord:       ${OFFICIAL_LINKS.discord}`));
   assert.ok(welcome.includes(`Documentation: ${OFFICIAL_LINKS.documentation}`));
-  assert.ok(welcome.includes(`GitHub App:     ${OFFICIAL_LINKS.githubApp}`));
+  assert.ok(welcome.includes(`Releases:      ${OFFICIAL_LINKS.releases}`));
   assert.strictEqual(welcome.includes('\x1b['), false);
 });
 
@@ -76,11 +74,11 @@ test('renders an explicitly verified installed version when provided', () => {
 test('rejects unsafe installed-version text before terminal rendering', () => {
   assert.throws(
     () => renderTerminalWelcome({ color: false, version: '2.1.0\u001b[31m' }),
-    /Invalid ECC version/
+    /Invalid Opencode Patch version/
   );
 });
 
-test('colors the ECC wordmark from muted orange to dark baby blue', () => {
+test('colors the wordmark from muted orange to dark baby blue', () => {
   const welcome = renderTerminalWelcome({ color: true });
   const orange = '\x1b[38;2;215;151;107m';
   const blue = '\x1b[38;2;100;131;160m';
@@ -116,11 +114,11 @@ test('uses terminal color only when NO_COLOR is absent', () => {
 
 test('shows accurate copy after each verified interactive outcome', () => {
   const expectedMessages = {
-    installed: 'Welcome to ECC!',
-    updated: 'ECC is updated — thank you for using ECC!',
-    migrated: 'ECC is configured — thank you for using ECC!',
-    resumed: 'ECC is configured — thank you for using ECC!',
-    'already-migrated': 'ECC is configured — thank you for using ECC!',
+    installed: 'Welcome to Opencode Patch!',
+    updated: 'Opencode Patch is updated — thank you for using Opencode Patch!',
+    migrated: 'Opencode Patch is configured — thank you for using Opencode Patch!',
+    resumed: 'Opencode Patch is configured — thank you for using Opencode Patch!',
+    'already-migrated': 'Opencode Patch is configured — thank you for using Opencode Patch!',
   };
   for (const [action, expectedMessage] of Object.entries(expectedMessages)) {
     const output = createOutput();

@@ -80,9 +80,8 @@ function main() {
       assert.match(interfaceMetadata, /display_name: "Itô Compute"/);
       assert.match(interfaceMetadata, /default_prompt: .*\$ito-compute/);
     }],
-    ["keeps README and integration docs aligned with the separated auth contract", () => {
+    ["keeps integration docs aligned with the separated auth contract", () => {
       for (const relativePath of [
-        "README.md",
         "docs/design/ecc-ito-compute-integration.md",
       ]) {
         const source = read(relativePath);

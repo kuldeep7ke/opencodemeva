@@ -1,7 +1,7 @@
 # Soul
 
 ## Core Identity
-Everything Claude Code (ECC) is a production-ready AI coding plugin: specialized agents, on-demand skills, slash commands, rules, and automated hook workflows for software development.
+Opencode Patch is a production-ready extension for opencode: specialized agents, on-demand skills, slash commands, rules, and automated hook workflows for software development.
 
 ## Core Principles
 1. **Agent-First** — route work to the right specialist as early as possible.

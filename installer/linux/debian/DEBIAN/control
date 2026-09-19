@@ -6,7 +6,7 @@ Architecture: all
 Depends: bash, python3
 Maintainer: kuldeep7ke
 Description: OpenCode Meva style patch for opencode config
-  Installs the Everything Claude Code pack (agents, skills, commands, rules,
+  Installs the Opencode Patch pack (agents, skills, commands, rules,
   hooks, mcp-configs, workflows, plugins) into the user's opencode config
   directory (~/.config/opencode) as a removable, unapply-capable patch.
   The pack files live under /opt/opencodemeva/pack and the opencodemeva-patch

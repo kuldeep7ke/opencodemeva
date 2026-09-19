@@ -38,20 +38,20 @@ function containsTerminalControlBytes(value) {
   });
 }
 
-console.log('\n=== ECC welcome command tests ===\n');
+console.log('\n=== Opencode Patch welcome command tests ===\n');
 
-test('ecc welcome renders the install artwork for captured agent output', () => {
+test('opencode-patch welcome renders the install artwork for captured agent output', () => {
   const result = runEcc(['welcome']);
 
   assert.strictEqual(result.status, 0, result.stderr);
-  assert.match(result.stdout, /Welcome to ECC!/);
+  assert.match(result.stdout, /Welcome to Opencode Patch!/);
   assert.ok(result.stdout.includes(`v${version}`));
-  assert.match(result.stdout, /GitHub:\s+https:\/\/github\.com\/affaan-m\/ECC/);
-  assert.match(result.stdout, /Discord:\s+https:\/\/discord\.gg\/36yGMHGFbR/);
+  assert.match(result.stdout, /GitHub:\s+https:\/\/github\.com\/kuldeep7ke\/opencodemeva/);
+  assert.match(result.stdout, /Releases:\s+https:\/\/github\.com\/kuldeep7ke\/opencodemeva\/releases/);
   assert.strictEqual(result.stderr, '');
 });
 
-test('ecc welcome disables ANSI color when stdout is redirected', () => {
+test('opencode-patch welcome disables ANSI color when stdout is redirected', () => {
   const env = { ...process.env, TERM: 'xterm-256color' };
   delete env.NO_COLOR;
   const result = spawnSync(process.execPath, [eccScript, 'welcome'], {
@@ -64,13 +64,13 @@ test('ecc welcome disables ANSI color when stdout is redirected', () => {
   assert.strictEqual(result.stdout.includes('\u001b['), false);
 });
 
-test('ecc welcome supports explicit update and configured outcomes', () => {
+test('opencode-patch welcome supports explicit update and configured outcomes', () => {
   const cases = [
-    ['updated', /ECC is updated/],
-    ['configured', /ECC is configured/],
-    ['migrated', /ECC is configured/],
-    ['resumed', /ECC is configured/],
-    ['already-migrated', /ECC is configured/],
+    ['updated', /Opencode Patch is updated/],
+    ['configured', /Opencode Patch is configured/],
+    ['migrated', /Opencode Patch is configured/],
+    ['resumed', /Opencode Patch is configured/],
+    ['already-migrated', /Opencode Patch is configured/],
   ];
 
   for (const [action, expected] of cases) {
@@ -80,14 +80,14 @@ test('ecc welcome supports explicit update and configured outcomes', () => {
   }
 });
 
-test('ecc welcome renders a provider-verified installed version', () => {
+test('opencode-patch welcome renders a provider-verified installed version', () => {
   const result = runEcc(['welcome', '--version', '2.1.0']);
 
   assert.strictEqual(result.status, 0, result.stderr);
   assert.match(result.stdout, /v2\.1\.0/);
 });
 
-test('ecc welcome rejects unsafe version text', () => {
+test('opencode-patch welcome rejects unsafe version text', () => {
   const result = runEcc(['welcome', '--version', '2.1.0\u001b[31m']);
 
   assert.strictEqual(result.status, 1);
@@ -96,7 +96,7 @@ test('ecc welcome rejects unsafe version text', () => {
   assert.strictEqual(result.stdout, '');
 });
 
-test('ecc welcome keeps parser error output free of terminal control bytes', () => {
+test('opencode-patch welcome keeps parser error output free of terminal control bytes', () => {
   const actionResult = runEcc(['welcome', '--action', 'broken\u001b[31m']);
   const argumentResult = runEcc(['welcome', '--bad\u001b[31m']);
 
@@ -107,7 +107,7 @@ test('ecc welcome keeps parser error output free of terminal control bytes', () 
   }
 });
 
-test('ecc welcome rejects unknown actions before rendering', () => {
+test('opencode-patch welcome rejects unknown actions before rendering', () => {
   const result = runEcc(['welcome', '--action', 'broken']);
 
   assert.strictEqual(result.status, 1);

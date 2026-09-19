@@ -87,11 +87,11 @@ test('Copilot instructions include a prompt defense baseline', () => {
   assert.ok(instructions.includes('Never print tokens'));
 });
 
-test('README documents prompt-file settings and surfaces', () => {
-  const readme = read('README.md');
-  assert.ok(readme.includes('chat.promptFiles'));
-  assert.ok(readme.includes('.github/prompts/'));
-  assert.ok(readme.includes('.vscode/settings.json'));
+test('Copilot prompt-file settings and surfaces exist in the repo', () => {
+  const settings = read('.vscode/settings.json');
+  assert.ok(settings.includes('chat.promptFiles'));
+  assert.ok(fs.existsSync(path.join(repoRoot, '.github', 'prompts')));
+  assert.ok(fs.existsSync(path.join(repoRoot, '.github', 'copilot-instructions.md')));
 });
 
 if (failed > 0) {

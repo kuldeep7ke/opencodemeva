@@ -1,63 +1,66 @@
-# OpenCode ECC Plugin
+# Opencode Patch Plugin for opencode
 
-> WARNING: This README is specific to OpenCode usage.
-> If you installed ECC via npm (e.g. `npm install opencode-ecc`), refer to the root README instead.
-
-ECC plugin for OpenCode - agents, commands, hooks, and skills.
-
-## Installation
+Opencode Patch plugin for opencode — agents, commands, hooks, and skills. If
+you installed via npm (e.g. `npm install opencode-patch`), the
+`opencode-patch` CLI sets up rules and agents for you; refer to the root
+[README](../README.md) for the full guide.
 
 ## Installation Overview
 
-There are two ways to use ECC:
+There are two ways to use Opencode Patch:
 
 1. **npm package (recommended for most users)**
-   Install via npm/bun/yarn and use the `ecc-install` CLI to set up rules and agents.
+   Install via npm and use the `opencode-patch` CLI to set up rules and agents.
 
 2. **Direct clone / plugin mode**
-   Clone the repository and run OpenCode directly inside it.
+   Clone the repository and run opencode directly inside it.
 
 Choose the method that matches your workflow below.
 
 ### Option 1: npm Package
 
 ```bash
-npm install ecc-universal
+npm install opencode-patch
 ```
 
 Add to your `opencode.json`:
 
 ```json
 {
-  "plugin": ["ecc-universal"]
+  "plugin": ["opencode-patch"]
 }
 ```
 
-This loads the ECC OpenCode plugin module from npm:
+This loads the Opencode Patch opencode plugin module from npm:
+
 - hook/event integrations
 - bundled custom tools exported by the plugin
 
-It does **not** auto-register the full ECC command/agent/instruction catalog in your project config. For the full OpenCode setup, either:
-- run OpenCode inside this repository, or
-- copy the relevant `.opencode/commands/`, `.opencode/prompts/`, `.opencode/instructions/`, and the `instructions`, `agent`, and `command` config entries into your own project
+It does **not** auto-register the full command/agent/instruction catalog in
+your project config. For the full setup, either:
 
-After installation, the `ecc-install` CLI is also available:
+- run opencode inside this repository, or
+- copy the relevant `.opencode/commands/`, `.opencode/prompts/`,
+  `.opencode/instructions/`, and the `instructions`, `agent`, and `command`
+  config entries into your own project
+
+After installation, the `opencode-patch` CLI is also available:
 
 ```bash
-npx ecc-universal install typescript
+npx opencode-patch install
 ```
 
 ### Option 2: Direct Use
 
-Clone and run OpenCode in the repository:
+Clone and run opencode in the repository:
 
 ```bash
-git clone https://github.com/affaan-m/ECC
-cd ECC
+git clone https://github.com/kuldeep7ke/opencodemeva
+cd opencodemeva
 opencode
 ```
 
-If you also want to apply the ECC home install
+If you also want to apply the Opencode Patch home install
 (`node scripts/install-apply.js --target opencode --profile full`), build the
 plugin first so the compiled payload at `.opencode/dist/` exists:
 
@@ -66,9 +69,9 @@ node scripts/build-opencode.js   # or: npm run build:opencode
 node scripts/install-apply.js --target opencode --profile full
 ```
 
-Without `.opencode/dist/index.js`, OpenCode will detect the slash commands
-but silently skip plugin hooks and tools. The installer now fails fast with
-a pointer to this command if the build step is missing.
+Without `.opencode/dist/index.js`, opencode will detect the slash commands
+but silently skip plugin hooks and tools. The installer fails fast with a
+pointer to this command if the build step is missing.
 
 ## Features
 
@@ -167,35 +170,36 @@ a pointer to this command if the build step is missing.
 | changed-files | List files changed in session as a navigable tree |
 | dependency-analyzer | Analyze dependencies for outdated, vulnerable, and unused packages |
 
-## Hook Event Mapping
+## Hook Events
 
-OpenCode's plugin system maps to Claude Code hooks:
+Opencode plugin hooks listen to opencode's native events:
 
-| Claude Code | OpenCode |
-|-------------|----------|
-| PreToolUse | `tool.execute.before` |
-| PostToolUse | `tool.execute.after` |
-| Stop | `session.idle` |
-| SessionStart | `session.created` |
-| SessionEnd | `session.deleted` |
+| Event | When it fires |
+|-------|---------------|
+| `tool.execute.before` | Before a tool runs |
+| `tool.execute.after` | After a tool runs |
+| `file.edited` | After a file is edited |
+| `session.created` | When a session starts |
+| `session.idle` | When a session goes idle |
+| `session.deleted` | When a session ends |
 
-OpenCode has 20+ additional events not available in Claude Code.
+opencode exposes 20+ events; this plugin subscribes to the session, tool,
+file, todo, shell, compaction, and permission events listed above.
 
 ### Hook Runtime Controls
 
-OpenCode plugin hooks honor the same runtime controls used by Claude Code/Cursor:
-
 ```bash
-export ECC_HOOK_PROFILE=standard
-export ECC_DISABLED_HOOKS="pre:bash:tmux-reminder,post:edit:typecheck"
+export OPENCODE_PATCH_HOOK_PROFILE=standard
+export OPENCODE_PATCH_DISABLED_HOOKS="pre:bash:tmux-reminder,post:edit:typecheck"
 ```
 
-- `ECC_HOOK_PROFILE`: `minimal`, `standard` (default), `strict`
-- `ECC_DISABLED_HOOKS`: comma-separated hook IDs to disable
+- `OPENCODE_PATCH_HOOK_PROFILE`: `minimal`, `standard` (default), `strict`
+- `OPENCODE_PATCH_DISABLED_HOOKS`: comma-separated hook IDs to disable
 
 ## Skills
 
-The default OpenCode config loads 11 curated ECC skills via the `instructions` array:
+The default opencode config loads 11 curated skills via the `instructions`
+array:
 
 - coding-standards
 - backend-patterns
@@ -209,7 +213,8 @@ The default OpenCode config loads 11 curated ECC skills via the `instructions` a
 - api-design
 - e2e-testing
 
-Additional specialized skills are shipped in `skills/` but not loaded by default to keep OpenCode sessions lean:
+Additional specialized skills are shipped in `skills/` but not loaded by
+default to keep opencode sessions lean:
 
 - article-writing
 - content-engine
@@ -229,14 +234,14 @@ Full configuration in `opencode.json`:
     "skills/tdd-workflow/SKILL.md",
     "skills/security-review/SKILL.md"
   ],
-  "agent": { /* 12 agents */ },
-  "command": { /* 24 commands */ }
+  "agent": { "...": "see opencode.json for the 26 subagents" },
+  "command": { "...": "see opencode.json for the 26 commands" }
 }
 ```
 
-The reference config intentionally leaves model selection to OpenCode. Connect a
-provider and select a model in OpenCode; ECC's primary agent uses that global
-selection, and its subagents inherit the invoking primary agent's model.
+The reference config intentionally leaves model selection to opencode. Connect
+a provider and select a model in opencode; the primary agent uses that global
+selection, and subagents inherit the invoking primary agent's model.
 
 ## License
 

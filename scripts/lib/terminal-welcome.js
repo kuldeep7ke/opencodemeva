@@ -3,10 +3,9 @@
 const { version: ECC_VERSION } = require('../../package.json');
 
 const COMMUNITY_LINKS = Object.freeze({
-  github: 'https://github.com/affaan-m/ECC',
-  discord: 'https://discord.gg/36yGMHGFbR',
-  documentation: 'https://github.com/affaan-m/ECC#readme',
-  githubApp: 'https://github.com/apps/ecc-tools',
+  github: 'https://github.com/kuldeep7ke/opencodemeva',
+  documentation: 'https://github.com/kuldeep7ke/opencodemeva#readme',
+  releases: 'https://github.com/kuldeep7ke/opencodemeva/releases',
 });
 
 const SUCCESS_ACTIONS = Object.freeze([
@@ -18,12 +17,12 @@ const SUCCESS_ACTIONS = Object.freeze([
   'configured',
 ]);
 const SUCCESS_MESSAGES = Object.freeze({
-  installed: 'Welcome to ECC!',
-  updated: 'ECC is updated — thank you for using ECC!',
-  migrated: 'ECC is configured — thank you for using ECC!',
-  resumed: 'ECC is configured — thank you for using ECC!',
-  'already-migrated': 'ECC is configured — thank you for using ECC!',
-  configured: 'ECC is configured — thank you for using ECC!',
+  installed: 'Welcome to Opencode Patch!',
+  updated: 'Opencode Patch is updated — thank you for using Opencode Patch!',
+  migrated: 'Opencode Patch is configured — thank you for using Opencode Patch!',
+  resumed: 'Opencode Patch is configured — thank you for using Opencode Patch!',
+  'already-migrated': 'Opencode Patch is configured — thank you for using Opencode Patch!',
+  configured: 'Opencode Patch is configured — thank you for using Opencode Patch!',
 });
 // CFonts' default "block" face: https://github.com/dominikwilkowski/cfonts
 const ECC_WORDMARK = Object.freeze([
@@ -77,9 +76,8 @@ function renderWordmark(color) {
 function renderCommunityLinks() {
   const rows = Object.freeze([
     `GitHub:        ${COMMUNITY_LINKS.github}`,
-    `Discord:       ${COMMUNITY_LINKS.discord}`,
     `Documentation: ${COMMUNITY_LINKS.documentation}`,
-    `GitHub App:     ${COMMUNITY_LINKS.githubApp}`,
+    `Releases:      ${COMMUNITY_LINKS.releases}`,
   ]);
   const contentWidth = Math.max(...rows.map(row => row.length));
   const border = '─'.repeat(contentWidth + 2);
@@ -95,7 +93,7 @@ function renderTerminalWelcome(options = {}) {
   const color = options.color === true;
   const installedVersion = options.version || ECC_VERSION;
   if (!ECC_VERSION_PATTERN.test(installedVersion)) {
-    throw new Error(`Invalid ECC version: ${installedVersion}`);
+    throw new Error(`Invalid Opencode Patch version: ${installedVersion}`);
   }
   const graphic = renderWordmark(color);
   const successMessage = SUCCESS_MESSAGES[options.action] || SUCCESS_MESSAGES.installed;

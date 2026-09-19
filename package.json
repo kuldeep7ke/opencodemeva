@@ -1,7 +1,7 @@
 {
-  "name": "ecc-universal",
+  "name": "opencode-patch",
   "version": "2.2.1",
-  "description": "Harness-native agent operating system for Codex, OpenCode, Cursor, Gemini, Claude Code, and terminal workflows - skills, hooks, rules, MCP conventions, and operator control-plane patterns",
+  "description": "Offline patch for opencode CLI - 68 agents, 292 skills, 94 commands, 122 rules, guardrail hooks and MCP presets. Everything installs to ~/.config/opencode, nothing leaves your machine.",
   "publishConfig": {
     "access": "public"
   },
@@ -19,25 +19,22 @@
     "security",
     "automation",
     "best-practices",
-    "cursor",
-    "cursor-ide",
     "opencode",
-    "codex",
     "presentations",
     "slides"
   ],
   "author": {
-    "name": "Affaan Mustafa",
-    "url": "https://x.com/affaan"
+    "name": "Meva",
+    "url": "https://github.com/kuldeep7ke"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/affaan-m/ECC.git"
+    "url": "git+https://github.com/kuldeep7ke/opencodemeva.git"
   },
-  "homepage": "https://github.com/affaan-m/ECC#readme",
+  "homepage": "https://github.com/kuldeep7ke/opencodemeva#readme",
   "bugs": {
-    "url": "https://github.com/affaan-m/ECC/issues"
+    "url": "https://github.com/kuldeep7ke/opencodemeva/issues"
   },
   "files": [
     ".adal/",
@@ -61,8 +58,7 @@
     "CONTRIBUTING.md",
     "VERSION",
     "agent.yaml",
-    "assets/ecc-icon.svg",
-    "assets/hero.png",
+    "assets/opencode-icon.svg",
     "assets/images/community/",
     "assets/images/sponsors/",
     "agents/",
@@ -451,7 +447,9 @@
     "ecc-install": "scripts/install-apply.js",
     "ecc-memory-mcp": "scripts/memory-mcp.mjs",
     "ecc-plan-canvas": "scripts/plan-canvas.js",
-    "ecc-universal": "scripts/ecc.js"
+    "ecc-universal": "scripts/ecc.js",
+    "opencode-patch": "scripts/ecc.js",
+    "opencode-patch-memory-mcp": "scripts/memory-mcp.mjs"
   },
   "scripts": {
     "welcome": "echo '\\n  ecc-universal installed!\\n  Run: ecc typescript\\n  Compat: ecc-install typescript\\n  Docs: https://github.com/affaan-m/ECC\\n  Run or self-host any open-source model.\\n  Compute: Itô is the preferred compute sponsor — https://compute.itomarkets.com\\n  Any GPU provider works. This sponsorship link is passive: it does not invoke an RFQ, reserve capacity, provision compute, or configure serving.\\n  Separately, the opt-in ecc ito find bridge invokes the explicitly configured canonical Itô CLI and submits a live authenticated RFQ; it does not reserve capacity.\\n  Managed inference through Itô is not live yet.\\n'",
