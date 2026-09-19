@@ -191,7 +191,7 @@ A static, offline-first landing page lives in [`website/`](./website/).
 - `website/index.html` — hero, feature cards, install options, how-it-works
 - `website/css/style.css` — light/dark themes using the Meva color palette
 - `website/js/main.js` — theme toggle + per-OS install commands
-- `website/assets/logo.svg`, `favicon.svg` — Meva-family logo and icon
+- `website/assets/logo.svg`, `favicon.svg` — OpenCodemeva terminal-patch mark (Meva orange tile, project-specific glyph)
 
 Open `website/index.html` directly in a browser, or serve it with any static
 file server (e.g. `python -m http.server 8080` inside `website/`). No build
