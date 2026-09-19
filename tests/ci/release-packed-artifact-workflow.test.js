@@ -120,7 +120,7 @@ for (const workflowPath of workflowPaths) {
     const lifecycle = jobBlock(source, 'lifecycle', 'publish');
 
     assert.match(lifecycle, /needs:\s*verify/);
-    assert.match(lifecycle, /os:\s*\[ubuntu-latest, macos-latest, windows-latest\]/);
+assert.match(lifecycle, /os:\s*\[(?:ubuntu-latest|ubuntu-\d+\.\d+), macos-latest, windows-latest\]/);
     assert.match(lifecycle, /runs-on:\s*\$\{\{ matrix\.os \}\}/);
     assert.match(lifecycle, /node-version:\s*['"]20\.x['"]/);
     assert.match(lifecycle, /uses:\s*actions\/download-artifact@/);
