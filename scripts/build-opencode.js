@@ -24,3 +24,16 @@ execFileSync(process.execPath, [tscEntrypoint, "-p", path.join(opencodeDir, "tsc
   cwd: rootDir,
   stdio: "inherit",
 })
+
+const requiredOutputs = [
+  path.join(distDir, "index.js"),
+  path.join(distDir, "index.d.ts"),
+  path.join(distDir, "plugins", "index.js"),
+  path.join(distDir, "tools", "index.js"),
+]
+
+for (const file of requiredOutputs) {
+  if (!fs.existsSync(file)) {
+    throw new Error(`OpenCode build did not produce ${path.relative(rootDir, file)}`)
+  }
+}
