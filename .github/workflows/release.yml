@@ -10,7 +10,7 @@ permissions:
 jobs:
   verify:
     name: Verify Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       already_published: ${{ steps.npm_publish_state.outputs.already_published }}
       dist_tag: ${{ steps.npm_publish_state.outputs.dist_tag }}
@@ -147,7 +147,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-24.04, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -170,7 +170,7 @@ jobs:
 
   publish:
     name: Publish Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [verify, lifecycle]
     permissions:
       contents: write
