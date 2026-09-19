@@ -1,6 +1,6 @@
 ---
 name: design
-description: "Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini AI), corporate identity program (50 deliverables, CIP mockups), HTML presentations (Chart.js), banner design (22 styles, social/ads/web/print), icon design (15 styles, SVG, Gemini 3.1 Pro), social photos (HTMLâ†’screenshot, multi-platform). Actions: design logo, create CIP, generate mockups, build slides, design banner, generate icon, create social photos, social media images, brand identity, design system. Platforms: Facebook, Twitter, LinkedIn, YouTube, Instagram, Pinterest, TikTok, Threads, Google Ads."
+description: "Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini AI), corporate identity program (50 deliverables, CIP mockups), HTML presentations (Chart.js), banner design (22 styles, social/ads/web/print), icon design (15 styles, SVG, Gemini 3.1 Pro), social photos (HTML→screenshot, multi-platform). Actions: design logo, create CIP, generate mockups, build slides, design banner, generate icon, create social photos, social media images, brand identity, design system. Platforms: Facebook, Twitter, LinkedIn, YouTube, Instagram, Pinterest, TikTok, Threads, Google Ads."
 argument-hint: "[design-type] [context]"
 license: MIT
 metadata:
@@ -137,11 +137,11 @@ Load `references/banner-sizes-and-styles.md` for complete sizes and styles refer
 
 ### Banner: Workflow
 
-1. **Gather requirements** via `AskUserQuestion` â€” purpose, platform, content, brand, style, quantity
-2. **Research** â€” Activate `ui-ux-pro-max`, browse Pinterest for references
-3. **Design** â€” Create HTML/CSS banner with `frontend-design`, generate visuals with `ai-artist`/`ai-multimodal`
-4. **Export** â€” Screenshot to PNG at exact dimensions via `chrome-devtools`
-5. **Present** â€” Show all options side-by-side, iterate on feedback
+1. **Gather requirements** via `AskUserQuestion` — purpose, platform, content, brand, style, quantity
+2. **Research** — Activate `ui-ux-pro-max`, browse Pinterest for references
+3. **Design** — Create HTML/CSS banner with `frontend-design`, generate visuals with `ai-artist`/`ai-multimodal`
+4. **Export** — Screenshot to PNG at exact dimensions via `chrome-devtools`
+5. **Present** — Show all options side-by-side, iterate on feedback
 
 ### Banner: Quick Size Reference
 
@@ -172,7 +172,7 @@ Load `references/banner-sizes-and-styles.md` for complete sizes and styles refer
 
 - Safe zones: critical content in central 70-80%
 - One CTA per banner, bottom-right, min 44px height
-- Max 2 fonts, min 16px body, â‰¥32px headline
+- Max 2 fonts, min 16px body, ≥32px headline
 - Text under 20% for ads (Meta penalizes)
 - Print: 300 DPI, CMYK, 3-5mm bleed
 
@@ -212,47 +212,47 @@ python3 ~/.config/opencode/skills/design/scripts/icon/generate.py --prompt "user
 | flat | Material design, Google-style |
 | gradient | Modern brands, SaaS |
 
-**Model:** `gemini-3.1-pro-preview` â€” text-only output (SVG is XML text). No image generation API needed.
+**Model:** `gemini-3.1-pro-preview` — text-only output (SVG is XML text). No image generation API needed.
 
 ## Social Photos (Built-in)
 
-Multi-platform social image design: HTML/CSS â†’ screenshot export. Uses `ui-ux-pro-max`, `brand`, `design-system`, `chrome-devtools` skills.
+Multi-platform social image design: HTML/CSS → screenshot export. Uses `ui-ux-pro-max`, `brand`, `design-system`, `chrome-devtools` skills.
 
 Load `references/social-photos-design.md` for sizes, templates, best practices.
 
 ### Social Photos: Workflow
 
-1. **Orchestrate** â€” `project-management` skill for TODO tasks; parallel subagents for independent work
-2. **Analyze** â€” Parse prompt: subject, platforms, style, brand context, content elements
-3. **Ideate** â€” 3-5 concepts, present via `AskUserQuestion`
-4. **Design** â€” `/ckm:brand` â†’ `/ckm:design-system` â†’ randomly invoke `/ck:ui-ux-pro-max` OR `/ck:frontend-design`; HTML per idea Ã— size
-5. **Export** â€” `chrome-devtools` or Playwright screenshot at exact px (2x deviceScaleFactor)
-6. **Verify** â€” Use Chrome MCP or `chrome-devtools` skill to visually inspect exported designs; fix layout/styling issues and re-export
-7. **Report** â€” Summary to `plans/reports/` with design decisions
-8. **Organize** â€” Invoke `assets-organizing` skill to sort output files and reports
+1. **Orchestrate** — `project-management` skill for TODO tasks; parallel subagents for independent work
+2. **Analyze** — Parse prompt: subject, platforms, style, brand context, content elements
+3. **Ideate** — 3-5 concepts, present via `AskUserQuestion`
+4. **Design** — `/ckm:brand` → `/ckm:design-system` → randomly invoke `/ck:ui-ux-pro-max` OR `/ck:frontend-design`; HTML per idea × size
+5. **Export** — `chrome-devtools` or Playwright screenshot at exact px (2x deviceScaleFactor)
+6. **Verify** — Use Chrome MCP or `chrome-devtools` skill to visually inspect exported designs; fix layout/styling issues and re-export
+7. **Report** — Summary to `plans/reports/` with design decisions
+8. **Organize** — Invoke `assets-organizing` skill to sort output files and reports
 
 ### Social Photos: Key Sizes
 
 | Platform | Size (px) | Platform | Size (px) |
 |----------|-----------|----------|-----------|
-| IG Post | 1080Ã—1080 | FB Post | 1200Ã—630 |
-| IG Story | 1080Ã—1920 | X Post | 1200Ã—675 |
-| IG Carousel | 1080Ã—1350 | LinkedIn | 1200Ã—627 |
-| YT Thumb | 1280Ã—720 | Pinterest | 1000Ã—1500 |
+| IG Post | 1080×1080 | FB Post | 1200×630 |
+| IG Story | 1080×1920 | X Post | 1200×675 |
+| IG Carousel | 1080×1350 | LinkedIn | 1200×627 |
+| YT Thumb | 1280×720 | Pinterest | 1000×1500 |
 
 ## Workflows
 
 ### Complete Brand Package
 
-1. **Logo** â†’ `scripts/logo/generate.py` â†’ Generate logo variants
-2. **CIP** â†’ `scripts/cip/generate.py --logo ...` â†’ Create deliverable mockups
-3. **Presentation** â†’ Load `references/slides-create.md` â†’ Build pitch deck
+1. **Logo** → `scripts/logo/generate.py` → Generate logo variants
+2. **CIP** → `scripts/cip/generate.py --logo ...` → Create deliverable mockups
+3. **Presentation** → Load `references/slides-create.md` → Build pitch deck
 
 ### New Design System
 
-1. **Brand** (brand skill) â†’ Define colors, typography, voice
-2. **Tokens** (design-system skill) â†’ Create semantic token layers
-3. **Implement** (ui-styling skill) â†’ Configure Tailwind, shadcn/ui
+1. **Brand** (brand skill) → Define colors, typography, voice
+2. **Tokens** (design-system skill) → Create semantic token layers
+3. **Implement** (ui-styling skill) → Configure Tailwind, shadcn/ui
 
 ## References
 

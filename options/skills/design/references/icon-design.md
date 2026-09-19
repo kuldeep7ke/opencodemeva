@@ -103,16 +103,16 @@ python3 ~/.config/opencode/skills/design/scripts/icon/generate.py --list-categor
 ## Model
 
 - **gemini-3.1-pro-preview**: Best thinking, token efficiency, factual consistency
-- Text-only output (SVG is XML text) â€” no image generation API needed
+- Text-only output (SVG is XML text) — no image generation API needed
 - Supports structured output for consistent SVG formatting
 
 ## Workflow
 
-1. Describe icon â†’ `--prompt "settings gear"`
-2. Choose style â†’ `--style outlined`
-3. Generate â†’ script outputs .svg file
-4. Optionally batch â†’ `--batch 4` for variations
-5. Multi-size export â†’ `--sizes "16,24,32,48"`
+1. Describe icon → `--prompt "settings gear"`
+2. Choose style → `--style outlined`
+3. Generate → script outputs .svg file
+4. Optionally batch → `--batch 4` for variations
+5. Multi-size export → `--sizes "16,24,32,48"`
 
 ## Setup
 

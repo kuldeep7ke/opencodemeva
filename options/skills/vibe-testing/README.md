@@ -2,7 +2,7 @@
 
 **Pressure-test your specs with LLM reasoning before writing code.**
 
-Vibe testing is a technique for validating specification documents by simulating real-world scenarios against them. An LLM reads your spec docs, traces through a concrete user scenario step by step, and flags every gap, conflict, and ambiguity â€” before anyone writes a line of implementation.
+Vibe testing is a technique for validating specification documents by simulating real-world scenarios against them. An LLM reads your spec docs, traces through a concrete user scenario step by step, and flags every gap, conflict, and ambiguity — before anyone writes a line of implementation.
 
 ## Why
 
@@ -73,11 +73,11 @@ Once installed, the skill activates when you ask your coding agent to validate s
 
 ```
 vibe-testing/
-â”œâ”€â”€ SKILL.md                          # The skill definition (Agent Skills standard)
-â”œâ”€â”€ references/
-â”‚   â””â”€â”€ simulator-prompt.md           # Copy-paste prompt templates
-â””â”€â”€ examples/
-    â””â”€â”€ example-vibe-test.md          # Complete example: e-commerce checkout flow
+├── SKILL.md                          # The skill definition (Agent Skills standard)
+├── references/
+│   └── simulator-prompt.md           # Copy-paste prompt templates
+└── examples/
+    └── example-vibe-test.md          # Complete example: e-commerce checkout flow
 ```
 
 ## The Gap Report
@@ -92,12 +92,12 @@ Vibe tests produce a structured gap report:
 
 ## Example
 
-The included example tests an e-commerce checkout against specs for auth, payments, inventory, orders, notifications, and shipping. A single scenario â€” "first-time buyer, payment declined, retries with new card" â€” found:
+The included example tests an e-commerce checkout against specs for auth, payments, inventory, orders, notifications, and shipping. A single scenario — "first-time buyer, payment declined, retries with new card" — found:
 
-- **Payment retry timing exceeds inventory hold** â€” stock can be sold to another customer while the buyer is entering a new card number
-- **Auth token expires mid-checkout** â€” 15-minute JWT TTL vs. potentially longer checkout flow on slow connections
-- **Payment succeeds but order confirmation fails** â€” customer is charged with no order record (no saga/compensation defined)
-- **Guest checkout order access undefined** â€” no spec for how a guest views their order status
+- **Payment retry timing exceeds inventory hold** — stock can be sold to another customer while the buyer is entering a new card number
+- **Auth token expires mid-checkout** — 15-minute JWT TTL vs. potentially longer checkout flow on slow connections
+- **Payment succeeds but order confirmation fails** — customer is charged with no order record (no saga/compensation defined)
+- **Guest checkout order access undefined** — no spec for how a guest views their order status
 
 Each would have been a rewrite-level discovery weeks into implementation.
 
@@ -107,4 +107,4 @@ MIT
 
 ---
 
-Built by [Knot0](https://knot0.com) â€” software that assembles itself.
+Built by [Knot0](https://knot0.com) — software that assembles itself.

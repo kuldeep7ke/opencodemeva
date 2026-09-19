@@ -124,14 +124,14 @@ python ~/.config/opencode/skills/design-system/scripts/search-slides.py "tractio
 
 ```
 1. What's the slide goal?
-   â””â”€> Search layout-logic.csv
+   └─> Search layout-logic.csv
 
 2. What emotion should it trigger?
-   â””â”€> Search color-logic.csv
+   └─> Search color-logic.csv
 
 3. What's the content type?
-   â””â”€> Search typography.csv
+   └─> Search typography.csv
 
 4. Should it break pattern?
-   â””â”€> Check position (1/3, 2/3) â†’ Use full-bleed
+   └─> Check position (1/3, 2/3) → Use full-bleed
 ```

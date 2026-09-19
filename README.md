@@ -135,6 +135,7 @@ opencodemeva install    [--target <dir>] [--overwrite] [--dry-run]
 opencodemeva uninstall  [--target <dir>] [--dry-run]
 opencodemeva status     [--target <dir>]
 opencodemeva validate
+opencodemeva help
 ```
 
 | Flag | Meaning |

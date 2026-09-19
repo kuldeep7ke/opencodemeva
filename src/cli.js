@@ -21,16 +21,30 @@ Options:
 `;
 
 function parseArgs(argv) {
-  const out = { target: null, overwrite: false, dryRun: false, yes: false, cmd: null };
+  const out = { target: null, overwrite: false, dryRun: false, yes: false, cmd: null, help: false };
+  const known = new Set(["--overwrite", "--dry-run", "-y", "--yes", "--yes=-1", "--target", "--help", "-h"]);
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--overwrite") out.overwrite = true;
     else if (a === "--dry-run") out.dryRun = true;
     else if (a === "-y" || a === "--yes") out.yes = true;
     else if (a === "--yes=-1") out.yes = true;
-    else if (a === "--target") { out.target = argv[++i]; }
-    else if (a.startsWith("--target=")) out.target = a.slice("--target=".length);
+    else if (a === "--help" || a === "-h") out.help = true;
+    else if (a === "--target") {
+      const v = argv[++i];
+      if (v === undefined || v.startsWith("-")) {
+        throw new Error("--target requires a directory value (got nothing). Refusing to fall back to your live config.");
+      }
+      out.target = v;
+    }
+    else if (a.startsWith("--target=")) {
+      const v = a.slice("--target=".length);
+      if (!v) throw new Error("--target= requires a directory value (got empty). Refusing to fall back to your live config.");
+      out.target = v;
+    }
+    else if (a.startsWith("-")) throw new Error(`unknown flag: ${a}`);
     else if (!out.cmd) out.cmd = a;
+    else throw new Error(`unexpected argument: ${a}`);
   }
   return out;
 }
@@ -58,7 +72,8 @@ function printLogs(logs) {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  const cmd = args.cmd || "help";
+  // --help/-h anywhere wins: never fall through into a live install prompt.
+  const cmd = args.help ? "help" : args.cmd || "help";
   const configDir = args.target ? path.resolve(args.target) : opencodeConfigDir();
 
   if (cmd === "help" || cmd === "--help" || cmd === "-h") {

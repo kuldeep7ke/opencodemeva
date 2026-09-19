@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # opencodemeva installer for Ubuntu/Debian (Bash)
-# Usage: ./install.sh [--target <dir>] [--overwrite] [--dry-run]
+# Usage: ./install.sh [--target <dir>] [--overwrite] [--dry-run] [-y]
+# (this wrapper always runs `install`; use `node src/cli.js help` for all commands)
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

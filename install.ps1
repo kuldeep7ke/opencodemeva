@@ -1,5 +1,6 @@
 # opencodemeva installer for Windows (PowerShell)
-# Usage: .\install.ps1 [--target <dir>] [--overwrite] [--dry-run]
+# Usage: .\install.ps1 [--target <dir>] [--overwrite] [--dry-run] [-y]
+# (this wrapper always runs `install`; use `node src/cli.js help` for all commands)
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 

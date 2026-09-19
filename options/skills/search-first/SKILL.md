@@ -1,10 +1,10 @@
 ---
 name: search-first
-description: Research-before-coding workflow. Search for existing tools, libraries, and patterns before writing custom code. Invokes the researcher agent.
+description: Research-before-coding workflow. Search for existing tools, libraries, and patterns before writing custom code. Delegates parallel research to the explore agent.
 origin: ECC
 ---
 
-# /search-first Ã¢â‚¬â€ Research Before You Code
+# /search-first — Research Before You Code
 
 Systematizes the "search for existing solutions before implementing" workflow.
 
@@ -19,45 +19,45 @@ Use this skill when:
 ## Workflow
 
 ```
-Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â
-Ã¢â€â€š  0. TOOL AVAILABILITY PREFLIGHT             Ã¢â€â€š
-Ã¢â€â€š     Check search channels before relying on Ã¢â€â€š
-Ã¢â€â€š     them; report skipped channels honestly   Ã¢â€â€š
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¤
-Ã¢â€â€š  1. NEED ANALYSIS                           Ã¢â€â€š
-Ã¢â€â€š     Define what functionality is needed      Ã¢â€â€š
-Ã¢â€â€š     Identify language/framework constraints  Ã¢â€â€š
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¤
-Ã¢â€â€š  2. PARALLEL SEARCH (researcher agent)      Ã¢â€â€š
-Ã¢â€â€š     Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â  Ã¢â€â€š
-Ã¢â€â€š     Ã¢â€â€š  npm /   Ã¢â€â€š Ã¢â€â€š  MCP /   Ã¢â€â€š Ã¢â€â€š  GitHub / Ã¢â€â€š  Ã¢â€â€š
-Ã¢â€â€š     Ã¢â€â€š  PyPI    Ã¢â€â€š Ã¢â€â€š  Skills  Ã¢â€â€š Ã¢â€â€š  Web      Ã¢â€â€š  Ã¢â€â€š
-Ã¢â€â€š     Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ  Ã¢â€â€š
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¤
-Ã¢â€â€š  3. EVALUATE                                Ã¢â€â€š
-Ã¢â€â€š     Score candidates (functionality, maint, Ã¢â€â€š
-Ã¢â€â€š     community, docs, license, deps)         Ã¢â€â€š
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¤
-Ã¢â€â€š  4. DECIDE                                  Ã¢â€â€š
-Ã¢â€â€š     Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â  Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â  Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â  Ã¢â€â€š
-Ã¢â€â€š     Ã¢â€â€š  Adopt  Ã¢â€â€š  Ã¢â€â€š  Extend  Ã¢â€â€š  Ã¢â€â€š  Build   Ã¢â€â€š  Ã¢â€â€š
-Ã¢â€â€š     Ã¢â€â€š as-is   Ã¢â€â€š  Ã¢â€â€š  /Wrap   Ã¢â€â€š  Ã¢â€â€š  Custom  Ã¢â€â€š  Ã¢â€â€š
-Ã¢â€â€š     Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ  Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ  Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ  Ã¢â€â€š
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¤
-Ã¢â€â€š  5. IMPLEMENT                               Ã¢â€â€š
-Ã¢â€â€š     Install package / Configure MCP /       Ã¢â€â€š
-Ã¢â€â€š     Write minimal custom code               Ã¢â€â€š
-Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ
+┌─────────────────────────────────────────────┐
+│  0. TOOL AVAILABILITY PREFLIGHT             │
+│     Check search channels before relying on │
+│     them; report skipped channels honestly   │
+├─────────────────────────────────────────────┤
+│  1. NEED ANALYSIS                           │
+│     Define what functionality is needed      │
+│     Identify language/framework constraints  │
+├─────────────────────────────────────────────┤
+│  2. PARALLEL SEARCH (explore agent)         │
+│     ┌──────────┐ ┌──────────┐ ┌──────────┐  │
+│     │  npm /   │ │  MCP /   │ │  GitHub / │  │
+│     │  PyPI    │ │  Skills  │ │  Web      │  │
+│     └──────────┘ └──────────┘ └──────────┘  │
+├─────────────────────────────────────────────┤
+│  3. EVALUATE                                │
+│     Score candidates (functionality, maint, │
+│     community, docs, license, deps)         │
+├─────────────────────────────────────────────┤
+│  4. DECIDE                                  │
+│     ┌─────────┐  ┌──────────┐  ┌─────────┐  │
+│     │  Adopt  │  │  Extend  │  │  Build   │  │
+│     │ as-is   │  │  /Wrap   │  │  Custom  │  │
+│     └─────────┘  └──────────┘  └─────────┘  │
+├─────────────────────────────────────────────┤
+│  5. IMPLEMENT                               │
+│     Install package / Configure MCP /       │
+│     Write minimal custom code               │
+└─────────────────────────────────────────────┘
 ```
 
 ## Decision Matrix
 
 | Signal | Action |
 |--------|--------|
-| Exact match, well-maintained, MIT/Apache | **Adopt** Ã¢â‚¬â€ install and use directly |
-| Partial match, good foundation | **Extend** Ã¢â‚¬â€ install + write thin wrapper |
-| Multiple weak matches | **Compose** Ã¢â‚¬â€ combine 2-3 small packages |
-| Nothing suitable found | **Build** Ã¢â‚¬â€ write custom, but informed by research |
+| Exact match, well-maintained, MIT/Apache | **Adopt** — install and use directly |
+| Partial match, good foundation | **Extend** — install + write thin wrapper |
+| Multiple weak matches | **Compose** — combine 2-3 small packages |
+| Nothing suitable found | **Build** — write custom, but informed by research |
 
 ## How to Use
 
@@ -78,15 +78,15 @@ that are relevant to the task and project in front of you.
 
 Before writing a utility or adding functionality, mentally run through:
 
-0. Does this already exist in the repo? Ã¢â€ â€™ `rg` through relevant modules/tests first
-1. Is this a common problem? Ã¢â€ â€™ Search npm/PyPI
-2. Is there an MCP for this? Ã¢â€ â€™ Check `~/.config/opencode/opencode.json` and search
-3. Is there a skill for this? Ã¢â€ â€™ Check `~/.config/opencode/skills/`
-4. Is there a GitHub implementation/template? Ã¢â€ â€™ Run GitHub code search for maintained OSS before writing net-new code
+0. Does this already exist in the repo? → `rg` through relevant modules/tests first
+1. Is this a common problem? → Search npm/PyPI
+2. Is there an MCP for this? → Check `~/.config/opencode/opencode.json` and search
+3. Is there a skill for this? → Check `~/.config/opencode/skills/`
+4. Is there a GitHub implementation/template? → Run GitHub code search for maintained OSS before writing net-new code
 
 ### Full Mode (agent)
 
-For non-trivial functionality, launch the researcher agent:
+For non-trivial functionality, launch the explore agent:
 
 ```
 Agent(subagent_type="general-purpose", prompt="
@@ -105,30 +105,30 @@ tool name exposed by the active harness.
 ## Search Shortcuts by Category
 
 ### Development Tooling
-- Linting Ã¢â€ â€™ `eslint`, `ruff`, `textlint`, `markdownlint`
-- Formatting Ã¢â€ â€™ `prettier`, `black`, `gofmt`
-- Testing Ã¢â€ â€™ `jest`, `pytest`, `go test`
-- Pre-commit Ã¢â€ â€™ `husky`, `lint-staged`, `pre-commit`
+- Linting → `eslint`, `ruff`, `textlint`, `markdownlint`
+- Formatting → `prettier`, `black`, `gofmt`
+- Testing → `jest`, `pytest`, `go test`
+- Pre-commit → `husky`, `lint-staged`, `pre-commit`
 
 ### AI/LLM Integration
-- Claude SDK Ã¢â€ â€™ Context7 for latest docs
-- Prompt management Ã¢â€ â€™ Check MCP servers
-- Document processing Ã¢â€ â€™ `unstructured`, `pdfplumber`, `mammoth`
+- Claude SDK → Context7 for latest docs
+- Prompt management → Check MCP servers
+- Document processing → `unstructured`, `pdfplumber`, `mammoth`
 
 ### Data & APIs
-- HTTP clients Ã¢â€ â€™ `httpx` (Python), `ky`/`undici` (Node)
-- Validation Ã¢â€ â€™ `zod` (TS), `pydantic` (Python)
-- Database Ã¢â€ â€™ Check for MCP servers first
+- HTTP clients → `httpx` (Python), `ky`/`undici` (Node)
+- Validation → `zod` (TS), `pydantic` (Python)
+- Database → Check for MCP servers first
 
 ### Content & Publishing
-- Markdown processing Ã¢â€ â€™ `remark`, `unified`, `markdown-it`
-- Image optimization Ã¢â€ â€™ `sharp`, `imagemin`
+- Markdown processing → `remark`, `unified`, `markdown-it`
+- Image optimization → `sharp`, `imagemin`
 
 ## Integration Points
 
 ### With planner agent
-The planner should invoke researcher before Phase 1 (Architecture Review):
-- Researcher identifies available tools
+The planner should invoke the explore agent before Phase 1 (Architecture Review):
+- Explore identifies available tools
 - Planner incorporates them into the implementation plan
 - Avoids "reinventing the wheel" in the plan
 
@@ -151,7 +151,7 @@ Combine for progressive discovery:
 Need: Check markdown files for broken links
 Search: npm "markdown dead link checker"
 Found: textlint-rule-no-dead-link (score: 9/10)
-Action: ADOPT Ã¢â‚¬â€ npm install textlint-rule-no-dead-link
+Action: ADOPT — npm install textlint-rule-no-dead-link
 Result: Zero custom code, battle-tested solution
 ```
 
@@ -160,7 +160,7 @@ Result: Zero custom code, battle-tested solution
 Need: Resilient HTTP client with retries and timeout handling
 Search: npm "http client retry", PyPI "httpx retry"
 Found: got (Node) with retry plugin, httpx (Python) with built-in retry
-Action: ADOPT Ã¢â‚¬â€ use got/httpx directly with retry config
+Action: ADOPT — use got/httpx directly with retry config
 Result: Zero custom code, production-proven libraries
 ```
 
@@ -169,7 +169,7 @@ Result: Zero custom code, production-proven libraries
 Need: Validate project config files against a schema
 Search: npm "config linter schema", "json schema validator cli"
 Found: ajv-cli (score: 8/10)
-Action: ADOPT + EXTEND Ã¢â‚¬â€ install ajv-cli, write project-specific schema
+Action: ADOPT + EXTEND — install ajv-cli, write project-specific schema
 Result: 1 package + 1 schema file, no custom validation logic
 ```
 

@@ -85,7 +85,27 @@ for (const d of fs.readdirSync(path.join(M, "skills"))) {
 }
 
 console.log(`agents: ${[...allAgents.keys()].length} | commands: ${fs.readdirSync(path.join(M, "commands")).length} | skill dirs: ${skillDirs}`);
+
+// ---- bundle config ----
+try {
+  const cfg = JSON.parse(fs.readFileSync(path.join(M, "opencode.json"), "utf8"));
+  for (const p of cfg.plugin || []) {
+    if (typeof p === "string" && p.startsWith("./plugins/")) {
+      if (!fs.existsSync(path.join(M, p))) issues.push(`opencode.json: plugin referenced but missing: ${p}`);
+    }
+  }
+  for (const inst of cfg.instructions || []) {
+    const target = path.join(M, inst.replace(/^\.\//, ""));
+    if (!fs.existsSync(target)) issues.push(`opencode.json: instructions target missing: ${inst}`);
+  }
+} catch (e) {
+  issues.push(`opencode.json: not valid JSON (${e.message})`);
+}
+
 console.log(`ISSUES (${issues.length}):`);
 for (const i of issues) console.log("  -", i);
 console.log(`WARNINGS (${warn.length}) — first 40:`);
 for (const w of warn.slice(0, 40)) console.log("  ~", w);
+
+// A validator that cannot fail cannot gate anything.
+process.exitCode = issues.length ? 1 : 0;

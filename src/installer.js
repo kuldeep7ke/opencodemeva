@@ -23,6 +23,14 @@ function manifestExists(configDir) {
   return fs.existsSync(manifestPath(configDir));
 }
 
+function readManifest(configDir) {
+  try {
+    return JSON.parse(fs.readFileSync(manifestPath(configDir), "utf8"));
+  } catch {
+    return null;
+  }
+}
+
 export function loadBundleConfig() {
   return JSON.parse(fs.readFileSync(BUNDLE_OPENCODE, "utf8"));
 }
@@ -30,11 +38,52 @@ export function loadBundleConfig() {
 export function loadUserConfig(configDir) {
   const p = path.join(configDir, "opencode.json");
   if (!fs.existsSync(p)) return {};
+  const raw = fs.readFileSync(p, "utf8");
   try {
-    return JSON.parse(fs.readFileSync(p, "utf8"));
+    return JSON.parse(raw);
   } catch {
-    throw new Error(`Existing config is not valid JSON: ${p}`);
+    // Real-world opencode.json files often carry // or /* */ comments.
+    try {
+      return JSON.parse(stripJsonComments(raw));
+    } catch {
+      throw new Error(`Existing config is not valid JSON: ${p}`);
+    }
   }
+}
+
+// Strip // line comments and /* block comments, leaving string literals
+// (including comment-like sequences inside quotes) untouched.
+export function stripJsonComments(src) {
+  let out = "";
+  let i = 0;
+  let inStr = false;
+  let esc = false;
+  while (i < src.length) {
+    const c = src[i];
+    const next = src[i + 1];
+    if (inStr) {
+      out += c;
+      if (esc) esc = false;
+      else if (c === "\\") esc = true;
+      else if (c === '"') inStr = false;
+      i++;
+      continue;
+    }
+    if (c === '"') { inStr = true; out += c; i++; continue; }
+    if (c === "/" && next === "/") {
+      while (i < src.length && src[i] !== "\n") i++;
+      continue;
+    }
+    if (c === "/" && next === "*") {
+      i += 2;
+      while (i < src.length && !(src[i] === "*" && src[i + 1] === "/")) i++;
+      i += 2;
+      continue;
+    }
+    out += c;
+    i++;
+  }
+  return out;
 }
 
 // Only copy the option categories we ship. Never README / guides / memory.
@@ -86,10 +135,12 @@ function isPlainObjectSafe(v) {
 export function patchMemoryBinary(cfg) {
   const bin = findMemoryBinary();
   if (!bin || !cfg.mcp || !cfg.mcp.memory || !Array.isArray(cfg.mcp.memory.command)) return cfg;
-  // Only auto-enable the bundle's placeholder server; never touch a
+  // Only auto-patch the bundle's placeholder server; never touch a
   // user-defined memory server (it stays exactly as the user configured).
+  // The placeholder command is never a valid binary, so patch it whether
+  // the entry is enabled or not; preserve an explicit enabled:true.
   const placeholder = JSON.stringify(cfg.mcp.memory.command) === JSON.stringify(["codebase-memory-mcp"]);
-  if (placeholder && cfg.mcp.memory.enabled === false) {
+  if (placeholder) {
     cfg.mcp = { ...cfg.mcp, memory: { ...cfg.mcp.memory, command: [bin], enabled: true } };
   }
   return cfg;
@@ -118,11 +169,14 @@ export function install({ configDir = opencodeConfigDir(), overwrite = false, ba
 
   fs.mkdirSync(configDir, { recursive: true });
 
-  // 1. Backup existing opencode.json before we touch it.
+  // 1. Backup existing opencode.json before we touch it. First install wins:
+  // when a manifest already exists, the original backup (if any) is already
+  // recorded there — never back up our own generated output over it.
   const userCfgPath = path.join(configDir, "opencode.json");
   const backupPath = path.join(configDir, BACKUP_DIR, "opencode.json.bak");
+  const prevManifest = manifestExists(configDir) && !dryRun ? readManifest(configDir) : null;
   let restoredOnUninstall = null;
-  if (backup && fs.existsSync(userCfgPath) && !dryRun) {
+  if (backup && fs.existsSync(userCfgPath) && !dryRun && !prevManifest) {
     fs.mkdirSync(path.dirname(backupPath), { recursive: true });
     if (!fs.existsSync(backupPath)) {
       fs.copyFileSync(userCfgPath, backupPath);
@@ -153,6 +207,13 @@ export function install({ configDir = opencodeConfigDir(), overwrite = false, ba
         fs.copyFileSync(BUNDLE_AGENTS, destAgents);
         agentsInstalled = true;
         log(`installed ${destAgents}`);
+      } else if (overwrite) {
+        const pre = path.join(configDir, BACKUP_DIR, "AGENTS.md");
+        fs.mkdirSync(path.dirname(pre), { recursive: true });
+        if (!fs.existsSync(pre)) fs.copyFileSync(destAgents, pre);
+        fs.copyFileSync(BUNDLE_AGENTS, destAgents);
+        agentsInstalled = true;
+        log(`overwrite: AGENTS.md (previous copy kept at ${pre})`);
       } else {
         log("skipped existing AGENTS.md (kept user copy)");
       }
@@ -175,11 +236,13 @@ export function install({ configDir = opencodeConfigDir(), overwrite = false, ba
       log(`already present: ${a.rel}`);
     } else {
       if (!dryRun) {
-        // preserve any existing file before overwriting
+        // preserve the pre-existing file before overwriting (first backup wins)
         if (a.exists) {
           const pre = path.join(configDir, BACKUP_DIR, a.rel);
-          fs.mkdirSync(path.dirname(pre), { recursive: true });
-          fs.copyFileSync(a.dest, pre);
+          if (!fs.existsSync(pre)) {
+            fs.mkdirSync(path.dirname(pre), { recursive: true });
+            fs.copyFileSync(a.dest, pre);
+          }
         }
         fs.mkdirSync(path.dirname(a.dest), { recursive: true });
         fs.copyFileSync(a.src, a.dest);
@@ -190,22 +253,23 @@ export function install({ configDir = opencodeConfigDir(), overwrite = false, ba
     }
   }
 
-  // 4. Write manifest for clean uninstall.
+  // 4. Write manifest for clean uninstall. Merge with any previous manifest
+  // so reinstalls accumulate (never truncate) and the first install's
+  // hadUserConfig/backup stay authoritative for uninstall decisions.
   if (!dryRun) {
     const files = actions.filter((a) => a.kind === "copy" || a.kind === "overwrite").map((a) => a.rel);
     if (agentsInstalled) files.push("AGENTS.md");
-    else {
-      // Carry forward an AGENTS.md already tracked by a previous install.
-      const prev = manifestExists(configDir) ? JSON.parse(fs.readFileSync(manifestPath(configDir), "utf8")) : null;
-      if (prev?.files?.includes("AGENTS.md")) files.push("AGENTS.md");
-    }
+    const prev = prevManifest;
+    const prevFiles = prev?.files;
+    if (!agentsInstalled && Array.isArray(prevFiles) && prevFiles.includes("AGENTS.md")) files.push("AGENTS.md");
+    const mergedFiles = [...new Set([...(Array.isArray(prevFiles) ? prevFiles : []), ...files])];
     const manifest = {
       version: 1,
       installedAt: new Date().toISOString(),
       target: configDir,
-      backup: restoredOnUninstall,
-      hadUserConfig: hadUserConfigBefore,
-      files,
+      backup: restoredOnUninstall ?? prev?.backup ?? null,
+      hadUserConfig: prev ? prev.hadUserConfig : hadUserConfigBefore,
+      files: mergedFiles,
     };
     fs.writeFileSync(manifestPath(configDir), JSON.stringify(manifest, null, 2) + "\n");
     log(`wrote manifest ${manifestPath(configDir)}`);
@@ -229,11 +293,23 @@ export function uninstall({ configDir = opencodeConfigDir(), dryRun = false } = 
   if (!fs.existsSync(mp)) {
     return { logs: ["no manifest found; nothing to uninstall"], summary: null };
   }
-  const manifest = JSON.parse(fs.readFileSync(mp, "utf8"));
+  const manifest = readManifest(configDir);
+  if (!manifest) {
+    return { logs: [`manifest at ${mp} is not valid JSON; refusing to uninstall blind`], summary: null };
+  }
 
   let removed = 0;
   for (const rel of manifest.files || []) {
     const dest = path.join(configDir, rel);
+    const pre = path.join(configDir, BACKUP_DIR, rel);
+    if (!dryRun && fs.existsSync(pre)) {
+      // A user file was overwritten at install time: put it back.
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+      fs.copyFileSync(pre, dest);
+      fs.rmSync(pre, { force: true });
+      log(`restored user file: ${rel}`);
+      continue;
+    }
     if (!fs.existsSync(dest)) continue;
     if (!dryRun) fs.rmSync(dest, { force: true });
     removed++;
@@ -241,6 +317,7 @@ export function uninstall({ configDir = opencodeConfigDir(), dryRun = false } = 
   }
 
   // Clean up empty category directories we created (never touches user files).
+  // Also prunes the backup dir when every per-file backup was restored.
   if (!dryRun) {
     const walk = (dir) => {
       let entries;
@@ -258,7 +335,7 @@ export function uninstall({ configDir = opencodeConfigDir(), dryRun = false } = 
         // still has content or in use; leave it
       }
     };
-    for (const cat of COPY_DIRS) {
+    for (const cat of [...COPY_DIRS, BACKUP_DIR]) {
       const dir = path.join(configDir, cat);
       if (fs.existsSync(dir)) walk(dir);
     }
@@ -294,6 +371,6 @@ export function status(configDir = opencodeConfigDir()) {
     configDir,
     installed: fs.existsSync(mp),
     hasConfig: fs.existsSync(cfgFile),
-    manifest: fs.existsSync(mp) ? JSON.parse(fs.readFileSync(mp, "utf8")) : null,
+    manifest: fs.existsSync(mp) ? readManifest(configDir) : null,
   };
 }

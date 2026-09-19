@@ -101,10 +101,10 @@ Context:
 [only the relevant snippets or constraints]
 
 Respond with:
-1. Position â€” 1-2 sentences
-2. Reasoning â€” 3 concise bullets
-3. Risk â€” biggest risk in your recommendation
-4. Surprise â€” one thing the other voices may miss
+1. Position — 1-2 sentences
+2. Reasoning — 3 concise bullets
+3. Risk — biggest risk in your recommendation
+4. Surprise — one thing the other voices may miss
 
 Be direct. No hedging. Keep it under 300 words.
 ```
@@ -181,10 +181,10 @@ If the user wants another round:
 
 ## Related Skills
 
-- `santa-method` â€” adversarial verification
-- `knowledge-ops` â€” persist durable decision deltas correctly
-- `search-first` â€” gather external reference material before the council if needed
-- `architecture-decision-records` â€” formalize the outcome when the decision becomes long-lived system policy
+- `santa-method` — adversarial verification
+- `knowledge-ops` — persist durable decision deltas correctly
+- `search-first` — gather external reference material before the council if needed
+- `architecture-decision-records` — formalize the outcome when the decision becomes long-lived system policy
 
 ## Example
 

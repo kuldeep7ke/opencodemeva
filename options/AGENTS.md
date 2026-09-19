@@ -51,7 +51,8 @@ This patch adds curated opencode options grouped as:
 - **SEO** — `@seo` agent, `seo` skill.
 - **MCP** — `context7`, `playwright`, `sequential-thinking`, plus optional
   `memory`, `firecrawl`, `postgres` (disabled by default; enable in
-  `opencode.json` and provide required env vars). Codebase-memory agents and
+  `opencode.json` and provide required env vars — the installer auto-enables
+  `memory` when it finds the codebase-memory-mcp binary). Codebase-memory agents and
   the `codebase-memory` skill use the `memory` MCP server when enabled.
 - **LSP** — `lsp: true` plus the `lsp-validation` skill.
 - **Plugins** — console-log-warning, dangerous-command-blocker, env-protection,

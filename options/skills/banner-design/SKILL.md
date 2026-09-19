@@ -1,6 +1,6 @@
 ---
 name: banner-design
-description: "Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with AI-generated visuals. Actions: design, create, generate banner. Platforms: Facebook, Twitter/X, LinkedIn, YouTube, Instagram, Google Display, website hero, print. Styles: minimalist, gradient, bold typography, photo-based, illustrated, geometric, retro, glassmorphism, 3D, neon, duotone, editorial, collage. Uses ui-ux-pro-max, frontend-design, ai-artist, ai-multimodal skills."
+description: "Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with AI-generated visuals. Actions: design, create, generate banner. Platforms: Facebook, Twitter/X, LinkedIn, YouTube, Instagram, Google Display, website hero, print. Styles: minimalist, gradient, bold typography, photo-based, illustrated, geometric, retro, glassmorphism, 3D, neon, duotone, editorial, collage. Uses ui-ux-pro-max, frontend-design, imagegen-frontend-web, canvas-design skills."
 argument-hint: "[platform] [style] [dimensions]"
 license: MIT
 metadata:
@@ -26,19 +26,19 @@ Design banners across social, ads, web, and print formats. Generates multiple ar
 ### Step 1: Gather Requirements (AskUserQuestion)
 
 Collect via AskUserQuestion:
-1. **Purpose** â€” social cover, ad banner, website hero, print, or creative asset?
-2. **Platform/size** â€” which platform or custom dimensions?
-3. **Content** â€” headline, subtext, CTA, logo placement?
-4. **Brand** â€” existing brand guidelines? (check `docs/brand-guidelines.md`)
-5. **Style preference** â€” any art direction? (show style options if unsure)
-6. **Quantity** â€” how many options to generate? (default: 3)
+1. **Purpose** — social cover, ad banner, website hero, print, or creative asset?
+2. **Platform/size** — which platform or custom dimensions?
+3. **Content** — headline, subtext, CTA, logo placement?
+4. **Brand** — existing brand guidelines? (check `docs/brand-guidelines.md`)
+5. **Style preference** — any art direction? (show style options if unsure)
+6. **Quantity** — how many options to generate? (default: 3)
 
 ### Step 2: Research & Art Direction
 
 1. Activate `ui-ux-pro-max` skill for design intelligence
 2. Use Chrome browser to research Pinterest for design references:
    ```
-   Navigate to pinterest.com â†’ search "[purpose] banner design [style]"
+   Navigate to pinterest.com → search "[purpose] banner design [style]"
    Screenshot 3-5 reference pins for art direction inspiration
    ```
 3. Select 2-3 complementary art direction styles from references:
@@ -54,46 +54,29 @@ For each art direction option:
    - Max 2 typefaces, single CTA, 4.5:1 contrast ratio
    - Inject brand context via `inject-brand-context.cjs`
 
-2. **Generate visual elements** with `ai-artist` + `ai-multimodal` skills
+2. **Generate visual elements** with the `imagegen-frontend-web` skill
+   (AI-generated campaign visuals) or `canvas-design` (illustrated/poster styles).
+   Generate one image per art direction option at the platform aspect ratio;
+   keep text out of the generated visual (overlay headline, CTA, and logo in
+   the HTML/CSS composition step instead).
 
-   **a) Search prompt inspiration** (6000+ examples in ai-artist):
-   ```bash
-   python3 ~/.config/opencode/skills/ai-artist/scripts/search.py "<banner style keywords>"
-   ```
-
-   **b) Generate with Standard model** (fast, good for backgrounds/patterns):
-   ```bash
-   ~/.config/opencode/skills/.venv/bin/python3 ~/.config/opencode/skills/ai-multimodal/scripts/gemini_batch_process.py \
-     --task generate --model gemini-2.5-flash-image \
-     --prompt "<banner visual prompt>" --aspect-ratio <platform-ratio> \
-     --size 2K --output assets/banners/
-   ```
-
-   **c) Generate with Pro model** (4K, complex illustrations/hero visuals):
-   ```bash
-   ~/.config/opencode/skills/.venv/bin/python3 ~/.config/opencode/skills/ai-multimodal/scripts/gemini_batch_process.py \
-     --task generate --model gemini-3-pro-image-preview \
-     --prompt "<creative banner prompt>" --aspect-ratio <platform-ratio> \
-     --size 4K --output assets/banners/
-   ```
-
-   **When to use which model:**
-   | Use Case | Model | Quality |
-   |----------|-------|---------|
-   | Backgrounds, gradients, patterns | Standard (Flash) | 2K, fast |
-   | Hero illustrations, product shots | Pro | 4K, detailed |
-   | Photorealistic scenes, complex art | Pro | 4K, best quality |
-   | Quick iterations, A/B variants | Standard (Flash) | 2K, fast |
+   **When to use which approach:**
+   | Use Case | Approach | Quality |
+   |----------|----------|---------|
+   | Backgrounds, gradients, patterns | `imagegen-frontend-web`, simple prompt | Fast, good |
+   | Hero illustrations, product shots | `imagegen-frontend-web`, detailed prompt | Detailed |
+   | Illustrated/poster styles | `canvas-design` | Stylized |
+   | Quick iterations, A/B variants | Short prompts, small sizes first | Fast |
 
    **Aspect ratios:** `1:1`, `16:9`, `9:16`, `3:4`, `4:3`, `2:3`, `3:2`
    Match to platform - e.g., Twitter header = `3:1` (use `3:2` closest), Instagram story = `9:16`
 
-   **Pro model prompt tips** (see `ai-artist` references/nano-banana-pro-examples.md):
+   **Prompt tips for generated visuals:**
    - Be descriptive: style, lighting, mood, composition, color palette
    - Include art direction: "minimalist flat design", "cyberpunk neon", "editorial photography"
    - Specify no-text: "no text, no letters, no words" (text overlaid in HTML step)
 
-3. **Compose final banner** â€” overlay text, CTA, logo on generated visual in HTML/CSS
+3. **Compose final banner** — overlay text, CTA, logo on generated visual in HTML/CSS
 
 ### Step 4: Export Banners to Images
 
@@ -115,11 +98,11 @@ After designing HTML banners, export each to PNG using the Playwright MCP server
 **Output path convention** (per `assets-organizing` skill):
 ```
 assets/banners/{campaign}/
-â”œâ”€â”€ minimalist-1500x500.png
-â”œâ”€â”€ gradient-1500x500.png
-â”œâ”€â”€ bold-type-1500x500.png
-â”œâ”€â”€ minimalist-1080x1080.png    # if multi-size requested
-â””â”€â”€ ...
+├── minimalist-1500x500.png
+├── gradient-1500x500.png
+├── bold-type-1500x500.png
+├── minimalist-1080x1080.png    # if multi-size requested
+└── ...
 ```
 
 - Use kebab-case for filenames: `{style}-{width}x{height}.{ext}`
@@ -130,7 +113,7 @@ assets/banners/{campaign}/
 
 Present all exported images side-by-side. For each option show:
 - Art direction style name
-- Exported PNG preview (use `ai-multimodal` skill to display if needed)
+- Exported PNG preview (use the `multimodal-looker` agent to inspect it if needed)
 - Key design rationale
 - File path & dimensions
 
@@ -140,15 +123,15 @@ Iterate based on user feedback until approved.
 
 | Platform | Type | Size (px) | Aspect Ratio |
 |----------|------|-----------|--------------|
-| Facebook | Cover | 820 Ã— 312 | ~2.6:1 |
-| Twitter/X | Header | 1500 Ã— 500 | 3:1 |
-| LinkedIn | Personal | 1584 Ã— 396 | 4:1 |
-| YouTube | Channel art | 2560 Ã— 1440 | 16:9 |
-| Instagram | Story | 1080 Ã— 1920 | 9:16 |
-| Instagram | Post | 1080 Ã— 1080 | 1:1 |
-| Google Ads | Med Rectangle | 300 Ã— 250 | 6:5 |
-| Google Ads | Leaderboard | 728 Ã— 90 | 8:1 |
-| Website | Hero | 1920 Ã— 600-1080 | ~3:1 |
+| Facebook | Cover | 820 × 312 | ~2.6:1 |
+| Twitter/X | Header | 1500 × 500 | 3:1 |
+| LinkedIn | Personal | 1584 × 396 | 4:1 |
+| YouTube | Channel art | 2560 × 1440 | 16:9 |
+| Instagram | Story | 1080 × 1920 | 9:16 |
+| Instagram | Post | 1080 × 1080 | 1:1 |
+| Google Ads | Med Rectangle | 300 × 250 | 6:5 |
+| Google Ads | Leaderboard | 728 × 90 | 8:1 |
+| Website | Hero | 1920 × 600-1080 | ~3:1 |
 
 Full reference: `references/banner-sizes-and-styles.md`
 
@@ -173,7 +156,7 @@ Full 22 styles: `references/banner-sizes-and-styles.md`
 
 - **Safe zones**: critical content in central 70-80% of canvas
 - **CTA**: one per banner, bottom-right, min 44px height, action verb
-- **Typography**: max 2 fonts, min 16px body, â‰¥32px headline
+- **Typography**: max 2 fonts, min 16px body, ≥32px headline
 - **Text ratio**: under 20% for ads (Meta penalizes heavy text)
 - **Print**: 300 DPI, CMYK, 3-5mm bleed
 - **Brand**: always inject via `inject-brand-context.cjs`
