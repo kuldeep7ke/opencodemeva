@@ -11,7 +11,8 @@
     "./plugins/pre-commit-check.ts",
     "./plugins/session-summary.ts",
     "./plugins/tool-guardrails.ts",
-    "./plugins/type-checker.ts"
+    "./plugins/type-checker.ts",
+    "./plugins/cbm-augment.ts"
   ],
   "permission": {
     "read": {

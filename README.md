@@ -17,10 +17,10 @@ installer that ships it (`src/`, `install.ps1`, `install.sh`).
 
 | Category | Count | Highlights |
 | --- | --- | --- |
-| **Agents** | 37 | planning, review, security, database, design, language agents (Node, Python, Go, Java, Laravel, Flutter), vibe testing, SEO, multimodal-looker |
+| **Agents** | 40 | planning, review, security, database, design, language agents (Node, Python, Go, Java, Laravel, Flutter), vibe testing, SEO, multimodal-looker, codebase-memory/scout/auditor |
 | **Commands** | 26 | `/code-review`, `/security`, `/design`, `/tdd`, `/plan`, `/go-build`, `/e2e`, `/checkpoint`, `/dev-loop`, ... |
-| **Skills** | 79 | framework patterns, design systems, image/video gen, reasoning, deep research, SEO, TDD, debugging |
-| **Plugins** | 9 | console-log-warning, dangerous-command-blocker, env-protection, notification, pr-helper, pre-commit-check, session-summary, tool-guardrails, type-checker |
+| **Skills** | 80 | framework patterns, design systems, image/video gen, reasoning, deep research, SEO, TDD, debugging, codebase-memory |
+| **Plugins** | 10 | console-log-warning, dangerous-command-blocker, env-protection, notification, pr-helper, pre-commit-check, session-summary, tool-guardrails, type-checker, cbm-augment |
 | **MCP servers** | 6 | context7, playwright, sequential-thinking (enabled); memory, firecrawl, postgres (disabled until configured) |
 | **LSP** | on | `"lsp": true` |
 | **Instructions** | 1 | global `AGENTS.md` describing the pack and session rules |
@@ -75,6 +75,7 @@ Active TypeScript plugins loaded from `~/.config/opencode/plugins/`:
 - `session-summary` — writes an end-of-session summary
 - `tool-guardrails` — permission guardrails around risky tools
 - `type-checker` — runs the project type checker after edits
+- `cbm-augment` — auto-augments `grep`/`glob` with codebase-memory graph hits
 
 ### Permissions
 
@@ -189,8 +190,8 @@ node src/cli.js validate   # same checks via the CLI entry point
 options/            The curated patch bundle (the product)
   opencode.json     portable bundle config (plugins, MCP, permissions, lsp)
   AGENTS.md         global instructions installed with the pack
-  agents/          37 agents         commands/   26 commands
-  skills/          79 skills         plugins/    9 TS plugins
+  agents/          40 agents         commands/   26 commands
+  skills/          80 skills         plugins/    10 TS plugins
 src/                Node.js CLI installer
   cli.js           CLI entry (install/uninstall/status/validate)
   installer.js     install/uninstall logic, backup, manifest

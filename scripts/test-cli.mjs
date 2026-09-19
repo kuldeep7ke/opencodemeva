@@ -17,7 +17,7 @@ assert(r.summary.copied > 0, "fresh install copies option files");
 assert(status(tmp).installed, "manifest written after install");
 const cfg1 = JSON.parse(readFileSync(path.join(tmp, "opencode.json"), "utf8"));
 assert(cfg1.lsp === true, "lsp enabled by bundle");
-assert(Array.isArray(cfg1.plugin) && cfg1.plugin.length === 9, "9 bundle plugins merged");
+assert(Array.isArray(cfg1.plugin) && cfg1.plugin.length === 10, "10 bundle plugins merged");
 assert(cfg1.mcp?.context7, "context7 mcp added");
 assert(existsSync(path.join(tmp, "agents", "architect.md")), "agent file installed");
 
@@ -31,7 +31,7 @@ const merged = mergedConfig(userCfg, loadBundleConfig());
 assert(merged.lsp === false, "user lsp:false wins over bundle lsp:true");
 assert(merged.model === "custom/model", "user model preserved");
 assert(JSON.stringify(merged.mcp.context7.command) === JSON.stringify(["custom"]), "user mcp server definition wins");
-assert(merged.plugin.includes("./plugins/my-own.ts") && merged.plugin.length === 10, "user plugin unioned with bundle plugins");
+assert(merged.plugin.includes("./plugins/my-own.ts") && merged.plugin.length === 11, "user plugin unioned with bundle plugins");
 
 // 4. Uninstall restores user config.
 const tmp3 = mkdtempSync(path.join(tmpdir(), "opencodemeva-test3-"));
