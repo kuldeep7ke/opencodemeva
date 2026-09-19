@@ -30,5 +30,13 @@ module.exports = [
         languageOptions: {
             sourceType: 'module'
         }
+    },
+    {
+        files: ['website/**/*.js'],
+        languageOptions: {
+            globals: {
+                ...globals.browser
+            }
+        }
     }
 ];

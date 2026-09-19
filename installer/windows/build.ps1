@@ -1,4 +1,4 @@
-﻿# Builds the Windows patch installer (.exe) with Inno Setup.
+# Builds the Windows patch installer (.exe) with Inno Setup.
 # Stages the pack from the repo root into installer\_stage, runs ISCC, and
 # writes sha256 checksums to installer\dist\SHA256SUMS.txt.
 param(

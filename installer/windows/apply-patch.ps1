@@ -1,4 +1,4 @@
-﻿# apply-patch.ps1 - syncs the OpenCode Meva patch pack into ~/.config/opencode.
+# apply-patch.ps1 - syncs the OpenCode Meva patch pack into ~/.config/opencode.
 #
 #   Apply:   powershell -File apply-patch.ps1
 #   Unapply: powershell -File apply-patch.ps1 -Unapply

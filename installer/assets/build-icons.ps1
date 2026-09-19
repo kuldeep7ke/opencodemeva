@@ -1,4 +1,4 @@
-﻿# Builds app icon assets for the installer from the repo logo.
+# Builds app icon assets for the installer from the repo logo.
 #   - appicon.ico   (16, 24, 32, 48, 64, 128, 256 — BMP frames + PNG 256)
 #   - appicon-256.png / appicon-512.png
 #   - appicon.svg   (passthrough copy of assets/ecc-icon.svg)

@@ -5,7 +5,7 @@
 
   function applyTheme(theme) {
     document.documentElement.dataset.theme = theme;
-    try { localStorage.setItem('ocm_theme', theme); } catch (e) {}
+    try { localStorage.setItem('ocm_theme', theme); } catch { /* storage unavailable (file:// or private mode) */ }
     if (themeToggle) {
       const dark = theme === 'dark';
       if (moon) moon.classList.toggle('hidden', dark);
