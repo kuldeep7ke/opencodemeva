@@ -184,6 +184,19 @@ npm test            # end-to-end install/uninstall round-trip tests
 node src/cli.js validate   # same checks via the CLI entry point
 ```
 
+### Website
+
+A static, offline-first landing page lives in [`website/`](./website/).
+
+- `website/index.html` — hero, feature cards, install options, how-it-works
+- `website/css/style.css` — light/dark themes using the Meva color palette
+- `website/js/main.js` — theme toggle + per-OS install commands
+- `website/assets/logo.svg`, `favicon.svg` — Meva-family logo and icon
+
+Open `website/index.html` directly in a browser, or serve it with any static
+file server (e.g. `python -m http.server 8080` inside `website/`). No build
+step, no dependencies, no network required beyond the optional Inter font.
+
 ### Repository layout
 
 ```text
@@ -198,6 +211,7 @@ src/                Node.js CLI installer
   merge.js         deep-merge (user config wins)
   paths.js         platform config-dir + memory-binary resolution
 scripts/            validate.mjs (bundle checks), test-cli.mjs (e2e tests)
+website/            static landing page (logo/favicon from the Meva family)
 install.ps1         Windows wrapper            install.sh   Ubuntu/Debian wrapper
 ```
 
