@@ -24,7 +24,7 @@ mkdir -p "$STAGE/DEBIAN" \
          "$STAGE/usr/share/doc/$PKG"
 
 # Debian control metadata (no exec bit, generated fresh each build).
-cp "$HERE/DEBIAN/control" "$STAGE/DEBIAN/control"
+cp "$HERE/debian/DEBIAN/control" "$STAGE/DEBIAN/control"
 printf '%s\n' \
   "The OpenCode Meva patch pack is installed to /opt/opencodemeva/pack." \
   "Run 'opencodemeva-patch' to apply it to your ~/.config/opencode." \
@@ -43,8 +43,8 @@ cp "$REPO_ROOT/installer/assets/appicon-256.png" \
 cp "$REPO_ROOT/installer/assets/appicon-512.png" \
    "$STAGE/usr/share/icons/hicolor/512x512/apps/opencodemeva.png"
 
-cp "$HERE/DEBIAN/postinst" "$STAGE/DEBIAN/postinst"
-cp "$HERE/DEBIAN/postrm" "$STAGE/DEBIAN/postrm"
+cp "$HERE/debian/DEBIAN/postinst" "$STAGE/DEBIAN/postinst"
+cp "$HERE/debian/DEBIAN/postrm" "$STAGE/DEBIAN/postrm"
 chmod 0755 "$STAGE/usr/bin/opencodemeva-patch" \
            "$STAGE/opt/opencodemeva/apply-patch.sh" \
            "$STAGE/DEBIAN/postinst" \
